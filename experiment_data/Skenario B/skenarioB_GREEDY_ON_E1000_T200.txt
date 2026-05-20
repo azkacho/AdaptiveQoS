@@ -1,0 +1,20 @@
+=== SIMULATION LOG ===
+Mode: GREEDY
+Model: wsn_dqn_E1000_T200_20260508_130104.pth
+Start: 20260512_161530
+
+
+--- Step 0 | 16:15:30 ---
+  ⚙️ MODE CHANGED TO GREEDY (Auto-Reset)
+
+--- Step 8 | 16:15:31 ---
+  🔋 Auto Drain: ON ✅
+
+--- Step 204 | 16:15:57 ---
+  🌩️ EDF/Noise Changed: 0 -> 0.5
+
+--- Step 404 | 16:16:22 ---
+  🌩️ EDF/Noise Changed: 0.5 -> 0.9
+
+--- Step 604 | 16:16:48 ---
+  🌩️ EDF/Noise Changed: 0.9 -> 0

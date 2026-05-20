@@ -1,0 +1,20 @@
+=== SIMULATION LOG ===
+Mode: AI
+Model: wsn_dqn_E1000_T200_20260508_130104.pth
+Start: 20260512_161240
+
+
+--- Step 0 | 16:12:40 ---
+  🔄 SIMULATION RESET (Mode: AI)
+
+--- Step 6 | 16:12:41 ---
+  🔋 Auto Drain: ON ✅
+
+--- Step 203 | 16:13:07 ---
+  🌩️ EDF/Noise Changed: 0 -> 0.5
+
+--- Step 404 | 16:13:34 ---
+  🌩️ EDF/Noise Changed: 0.5 -> 0.9
+
+--- Step 602 | 16:14:00 ---
+  🌩️ EDF/Noise Changed: 0.9 -> 0

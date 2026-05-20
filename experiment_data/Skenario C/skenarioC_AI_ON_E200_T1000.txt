@@ -1,0 +1,29 @@
+=== SIMULATION LOG ===
+Mode: AI
+Model: wsn_dqn_E200_T1000_20260508_150922.pth
+Start: 20260516_221339
+
+
+--- Step 22 | 22:13:39 ---
+  🔁 Model switched → wsn_dqn_E200_T1000_20260508_150922.pth | Log baru dibuat
+
+--- Step 35 | 22:13:41 ---
+  🔋 Auto Drain: ON ✅
+
+--- Step 101 | 22:13:50 ---
+  🔻 Node 7: Manual Drain (855J -> 655J)
+
+--- Step 105 | 22:13:50 ---
+  🔻 Node 7: Manual Drain (848J -> 648J)
+
+--- Step 107 | 22:13:50 ---
+  🔻 Node 7: Manual Drain (644J -> 444J)
+
+--- Step 109 | 22:13:51 ---
+  🔻 Node 7: Manual Drain (439J -> 239J)
+
+--- Step 111 | 22:13:51 ---
+  🔻 Node 7: Manual Drain (235J -> 35J)
+
+--- Step 113 | 22:13:51 ---
+  🔻 Node 7: Manual Drain (30J -> 0J)

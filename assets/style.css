@@ -1,0 +1,138 @@
+/* assets/style.css - DARK MODE EDITION */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #1e272e; /* Dark Blue-Grey Background */
+    color: #d2dae2; /* Light Text */
+    height: 100vh;
+    overflow: hidden;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* HEADER */
+.header {
+    background-color: #2d3436; /* Darker header */
+    padding: 15px 25px;
+    border-bottom: 1px solid #485460;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    z-index: 20;
+}
+
+/* CONTENT WRAPPER */
+.content-wrapper {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+/* MAP CONTAINER */
+.map-container {
+    flex: 1;
+    position: relative;
+    background-color: #1e272e; /* Match body background */
+}
+
+/* SIDEBAR (CONTROL PANEL) */
+.control-panel {
+    width: 420px;
+    min-width: 400px;
+    padding: 20px;
+    background-color: #2d3436; /* Dark Sidebar */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-shrink: 0;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+    z-index: 10;
+    border-left: 1px solid #485460;
+}
+
+/* UI CARDS */
+.ui-card {
+    background-color: #353b48; /* Lighter Grey for Cards */
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: 1px solid #485460;
+}
+
+/* HEADINGS & TEXT */
+h4 {
+    color: #00d2d3; /* Cyan Neon Title */
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+label {
+    color: #f5f6fa;
+}
+
+/* BUTTONS */
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.ui-btn-reset {
+    background-color: #0984e3;
+    color: white;
+}
+.ui-btn-reset:hover { background-color: #74b9ff; }
+
+.ui-btn-drain {
+    background-color: #d63031;
+    color: white;
+}
+.ui-btn-drain:hover { background-color: #ff7675; }
+
+/* LEGEND MAP */
+.map-legend {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(45, 52, 54, 0.9);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #485460;
+    font-size: 11px;
+    color: #d2dae2;
+    z-index: 5;
+}
+
+/* LOG CONTAINER */
+#log-container {
+    background-color: #1e272e !important;
+    color: #00d2d3 !important;
+    border: 1px solid #485460 !important;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #2d3436; }
+::-webkit-scrollbar-thumb { background: #636e72; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #b2bec3; }
+
+/* PLOTLY FIX */
+.js-plotly-plot .plotly .modebar {
+    left: 50%;
+    transform: translateX(-50%);
+}

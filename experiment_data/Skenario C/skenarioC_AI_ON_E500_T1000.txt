@@ -1,0 +1,32 @@
+=== SIMULATION LOG ===
+Mode: AI
+Model: wsn_dqn_E500_T1000_20260508_150952.pth
+Start: 20260516_222201
+
+
+--- Step 0 | 22:22:01 ---
+  🔄 SIMULATION RESET (Mode: AI)
+
+--- Step 4 | 22:22:01 ---
+  🔋 Auto Drain: ON ✅
+
+--- Step 104 | 22:22:15 ---
+  🔻 Node 7: Manual Drain (871J -> 671J)
+
+--- Step 106 | 22:22:15 ---
+  🔻 Node 7: Manual Drain (669J -> 469J)
+
+--- Step 107 | 22:22:15 ---
+  🔻 Node 7: Manual Drain (467J -> 267J)
+
+--- Step 110 | 22:22:15 ---
+  🔻 Node 7: Manual Drain (466J -> 266J)
+
+--- Step 111 | 22:22:15 ---
+  🔻 Node 7: Manual Drain (464J -> 264J)
+
+--- Step 112 | 22:22:15 ---
+  🔻 Node 7: Manual Drain (263J -> 63J)
+
+--- Step 114 | 22:22:15 ---
+  🔻 Node 7: Manual Drain (61J -> 0J)

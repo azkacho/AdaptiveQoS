@@ -1,0 +1,8 @@
+=== SIMULATION LOG ===
+Mode: AI
+Model: wsn_dqn_E500_T1000_20260508_150952.pth
+Start: 20260511_221059
+
+
+--- Step 33 | 22:11:04 ---
+  🔋 Auto Drain: ON ✅

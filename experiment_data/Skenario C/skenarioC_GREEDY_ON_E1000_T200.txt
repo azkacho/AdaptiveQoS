@@ -1,0 +1,26 @@
+=== SIMULATION LOG ===
+Mode: GREEDY
+Model: wsn_dqn_E1000_T200_20260508_130104.pth
+Start: 20260517_192639
+
+
+--- Step 0 | 19:26:39 ---
+  ⚙️ MODE CHANGED TO GREEDY (Auto-Reset)
+
+--- Step 5 | 19:26:40 ---
+  🔋 Auto Drain: ON ✅
+
+--- Step 104 | 19:26:53 ---
+  🔻 Node 7: Manual Drain (862J -> 662J)
+
+--- Step 106 | 19:26:53 ---
+  🔻 Node 7: Manual Drain (660J -> 460J)
+
+--- Step 108 | 19:26:53 ---
+  🔻 Node 7: Manual Drain (457J -> 257J)
+
+--- Step 110 | 19:26:53 ---
+  🔻 Node 7: Manual Drain (254J -> 54J)
+
+--- Step 112 | 19:26:54 ---
+  🔻 Node 7: Manual Drain (53J -> 0J)
