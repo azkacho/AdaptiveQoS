@@ -1,8 +1,8 @@
 # config_rl.py
 
 # General simulation settings
-NUM_EPISODES = 500
-TIMESTEPS_PER_EPISODE = 1000
+NUM_EPISODES = 1000
+TIMESTEPS_PER_EPISODE = 500
 PACKET_SIZE_BITS = 32 * 8  # 256 bits (32 Bytes)
 RANDOM_SEED = 42
 

@@ -1,0 +1,35 @@
+[Running] python -u "d:\UGM\TA\AdaptiveQoS\baseline_random.py"
+=== MEMULAI BASELINE (RANDOM AGENT) ===
+Running for 1000 episodes...
+Baseline Episode: 50/1000 | Avg Reward: 106.47 | Drops: 36 | Retries: 466EDF: 0.2909
+Baseline Episode: 100/1000 | Avg Reward: 116.35 | Drops: 37 | Retries: 417EDF: 0.0094
+Baseline Episode: 150/1000 | Avg Reward: 106.88 | Drops: 36 | Retries: 464EDF: 0.2725
+Baseline Episode: 200/1000 | Avg Reward: 120.08 | Drops: 31 | Retries: 398EDF: 0.1926
+Baseline Episode: 250/1000 | Avg Reward: 104.94 | Drops: 42 | Retries: 474EDF: 0.0883
+Baseline Episode: 300/1000 | Avg Reward: 141.54 | Drops: 22 | Retries: 291EDF: 0.0310
+Baseline Episode: 350/1000 | Avg Reward: 121.26 | Drops: 28 | Retries: 392EDF: 0.3019
+Baseline Episode: 400/1000 | Avg Reward: 108.75 | Drops: 38 | Retries: 455EDF: 0.0619
+Baseline Episode: 450/1000 | Avg Reward: 77.42 | Drops: 43 | Retries: 611EDF: 0.4663
+Baseline Episode: 500/1000 | Avg Reward: 99.60 | Drops: 33 | Retries: 500EDF: 0.4189
+Baseline Episode: 550/1000 | Avg Reward: 108.86 | Drops: 34 | Retries: 454EDF: 0.3121
+Baseline Episode: 600/1000 | Avg Reward: 112.56 | Drops: 39 | Retries: 436EDF: 0.1520
+Baseline Episode: 650/1000 | Avg Reward: 103.95 | Drops: 42 | Retries: 479EDF: 0.0782
+Baseline Episode: 700/1000 | Avg Reward: 77.57 | Drops: 39 | Retries: 610EDF: 0.4793
+Baseline Episode: 750/1000 | Avg Reward: 130.55 | Drops: 31 | Retries: 346EDF: 0.1052
+Baseline Episode: 800/1000 | Avg Reward: 68.94 | Drops: 40 | Retries: 653EDF: 0.6365
+Baseline Episode: 850/1000 | Avg Reward: 100.78 | Drops: 45 | Retries: 495EDF: 0.0604
+Baseline Episode: 900/1000 | Avg Reward: 122.94 | Drops: 32 | Retries: 384EDF: 0.1871
+Baseline Episode: 950/1000 | Avg Reward: 56.79 | Drops: 48 | Retries: 714EDF: 0.5405
+Baseline Episode: 1000/1000 | Avg Reward: 105.73 | Drops: 41 | Retries: 470EDF: 0.1666
+
+[SELESAI] Grafik Baseline disimpan ke results/baseline_metrics_E1000_T200_20260526_091739.png
+[SUKSES] Data baseline disimpan ke: results\hasil_baseline_random_E1000_T200_20260526_091739.csv
+
+=== RANGKUMAN PERFORMA BASELINE (RANDOM) ===
+Rata-rata Reward: 95.14
+Rata-rata Drops : 38.37 per episode
+Rata-rata Retries: 522.63 per episode
+Rata-rata QoS   : 0.8596
+
+[Done] exited with code=0 in 5.945 seconds
+

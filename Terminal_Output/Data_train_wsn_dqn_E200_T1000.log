@@ -1,0 +1,35 @@
+[Running] python -u "d:\UGM\TA\AdaptiveQoS\main-rl.py"
+WSN Environment Initialized.
+State Dimension : 7  (termasuk EDF)
+Action Dimension: 15
+EDF Strategy    : curriculum
+Training for 200 episodes...
+
+Ep   10/200 | Reward:  627.71 | QoS: 0.883 | Drops: 161 | PSR: 0.8390 | Steps: 1000 | Retries: 1855 | eps: 0.970 | EDF: 0.09
+Ep   20/200 | Reward:  650.56 | QoS: 0.889 | Drops: 152 | PSR: 0.8480 | Steps: 1000 | Retries: 1741 | eps: 0.942 | EDF: 0.03
+Ep   30/200 | Reward:  553.06 | QoS: 0.871 | Drops: 176 | PSR: 0.8240 | Steps: 1000 | Retries: 2227 | eps: 0.914 | EDF: 0.22
+Ep   40/200 | Reward:  617.74 | QoS: 0.888 | Drops: 153 | PSR: 0.8470 | Steps: 1000 | Retries: 1904 | eps: 0.887 | EDF: 0.14
+Ep   50/200 | Reward:  613.59 | QoS: 0.887 | Drops: 155 | PSR: 0.8450 | Steps: 1000 | Retries: 1925 | eps: 0.861 | EDF: 0.16
+Ep   60/200 | Reward:  568.58 | QoS: 0.876 | Drops: 169 | PSR: 0.8310 | Steps: 1000 | Retries: 2149 | eps: 0.835 | EDF: 0.23
+Ep   70/200 | Reward:  674.75 | QoS: 0.905 | Drops: 130 | PSR: 0.8700 | Steps: 1000 | Retries: 1619 | eps: 0.810 | EDF: 0.13
+Ep   80/200 | Reward:  589.10 | QoS: 0.888 | Drops: 152 | PSR: 0.8480 | Steps: 1000 | Retries: 2046 | eps: 0.786 | EDF: 0.27
+Ep   90/200 | Reward:  671.63 | QoS: 0.909 | Drops: 124 | PSR: 0.8760 | Steps: 1000 | Retries: 1634 | eps: 0.763 | EDF: 0.17
+Ep  100/200 | Reward:  717.09 | QoS: 0.919 | Drops: 110 | PSR: 0.8900 | Steps: 1000 | Retries: 1407 | eps: 0.740 | EDF: 0.13
+Ep  110/200 | Reward:  773.88 | QoS: 0.929 | Drops:  97 | PSR: 0.9030 | Steps: 1000 | Retries: 1124 | eps: 0.719 | EDF: 0.00
+Ep  120/200 | Reward:  705.79 | QoS: 0.919 | Drops: 110 | PSR: 0.8900 | Steps: 1000 | Retries: 1463 | eps: 0.697 | EDF: 0.20
+Ep  130/200 | Reward:  656.85 | QoS: 0.907 | Drops: 127 | PSR: 0.8730 | Steps: 1000 | Retries: 1707 | eps: 0.677 | EDF: 0.25
+Ep  140/200 | Reward:  736.09 | QoS: 0.915 | Drops: 116 | PSR: 0.8840 | Steps: 1000 | Retries: 1313 | eps: 0.657 | EDF: 0.01
+Ep  150/200 | Reward:  722.41 | QoS: 0.913 | Drops: 119 | PSR: 0.8810 | Steps: 1000 | Retries: 1381 | eps: 0.637 | EDF: 0.06
+Ep  160/200 | Reward:  719.99 | QoS: 0.914 | Drops: 117 | PSR: 0.8830 | Steps: 1000 | Retries: 1393 | eps: 0.618 | EDF: 0.08
+Ep  170/200 | Reward:  680.22 | QoS: 0.909 | Drops: 124 | PSR: 0.8760 | Steps: 1000 | Retries: 1591 | eps: 0.600 | EDF: 0.15
+Ep  180/200 | Reward:  743.47 | QoS: 0.923 | Drops: 105 | PSR: 0.8950 | Steps: 1000 | Retries: 1276 | eps: 0.582 | EDF: 0.07
+Ep  190/200 | Reward:  687.55 | QoS: 0.915 | Drops: 115 | PSR: 0.8850 | Steps: 1000 | Retries: 1554 | eps: 0.565 | EDF: 0.22
+Ep  200/200 | Reward:  698.56 | QoS: 0.909 | Drops: 124 | PSR: 0.8760 | Steps: 1000 | Retries: 1500 | eps: 0.548 | EDF: 0.09
+
+Training selesai!
+  PTH : models\wsn_dqn_E200_T1000_20260526_081743.pth
+  CSV : logs\train_log_wsn_dqn_E200_T1000_20260526_081743.csv
+  PNG : results\plot_wsn_dqn_E200_T1000_20260526_081743.png
+
+[Done] exited with code=0 in 344.908 seconds
+

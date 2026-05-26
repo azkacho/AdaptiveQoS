@@ -1,0 +1,25 @@
+[Running] python -u "d:\UGM\TA\AdaptiveQoS\baseline_random.py"
+=== MEMULAI BASELINE (RANDOM AGENT) ===
+Running for 500 episodes...
+Baseline Episode: 50/500 | Avg Reward: 492.16 | Drops: 199 | Retries: 2531EDF: 0.2909
+Baseline Episode: 100/500 | Avg Reward: 621.61 | Drops: 168 | Retries: 1886EDF: 0.0094
+Baseline Episode: 150/500 | Avg Reward: 584.90 | Drops: 149 | Retries: 2067EDF: 0.2725
+Baseline Episode: 200/500 | Avg Reward: 606.23 | Drops: 158 | Retries: 1962EDF: 0.1926
+Baseline Episode: 250/500 | Avg Reward: 599.68 | Drops: 164 | Retries: 1995EDF: 0.0883
+Baseline Episode: 300/500 | Avg Reward: 620.66 | Drops: 169 | Retries: 1891EDF: 0.0310
+Baseline Episode: 350/500 | Avg Reward: 521.76 | Drops: 178 | Retries: 2383EDF: 0.3019
+Baseline Episode: 400/500 | Avg Reward: 552.16 | Drops: 197 | Retries: 2233EDF: 0.0619
+Baseline Episode: 450/500 | Avg Reward: 462.57 | Drops: 170 | Retries: 2677EDF: 0.4663
+Baseline Episode: 500/500 | Avg Reward: 484.43 | Drops: 170 | Retries: 2568EDF: 0.4189
+
+[SELESAI] Grafik Baseline disimpan ke results/baseline_metrics_E500_T1000_20260526_084030.png
+[SUKSES] Data baseline disimpan ke: results\hasil_baseline_random_E500_T1000_20260526_084030.csv
+
+=== RANGKUMAN PERFORMA BASELINE (RANDOM) ===
+Rata-rata Reward: 543.23
+Rata-rata Drops : 180.07 per episode
+Rata-rata Retries: 2276.32 per episode
+Rata-rata QoS   : 0.8685
+
+[Done] exited with code=0 in 8.389 seconds
+

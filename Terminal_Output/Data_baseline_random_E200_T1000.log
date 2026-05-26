@@ -1,0 +1,19 @@
+[Running] python -u "d:\UGM\TA\AdaptiveQoS\baseline_random.py"
+=== MEMULAI BASELINE (RANDOM AGENT) ===
+Running for 200 episodes...
+Baseline Episode: 50/200 | Avg Reward: 496.79 | Drops: 195 | Retries: 2508EDF: 0.2909
+Baseline Episode: 100/200 | Avg Reward: 659.83 | Drops: 150 | Retries: 1695EDF: 0.0094
+Baseline Episode: 150/200 | Avg Reward: 566.81 | Drops: 163 | Retries: 2158EDF: 0.2725
+Baseline Episode: 200/200 | Avg Reward: 590.19 | Drops: 164 | Retries: 2042EDF: 0.1926
+
+[SELESAI] Grafik Baseline disimpan ke results/baseline_metrics_E200_T1000_20260526_082521.png
+[SUKSES] Data baseline disimpan ke: results\hasil_baseline_random_E200_T1000_20260526_082521.csv
+
+=== RANGKUMAN PERFORMA BASELINE (RANDOM) ===
+Rata-rata Reward: 576.25
+Rata-rata Drops : 175.59 per episode
+Rata-rata Retries: 2111.89 per episode
+Rata-rata QoS   : 0.8719
+
+[Done] exited with code=0 in 5.368 seconds
+

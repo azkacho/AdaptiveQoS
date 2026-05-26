@@ -4,7 +4,7 @@ import os
 import glob
 from config_rl import NUM_EPISODES, TIMESTEPS_PER_EPISODE
 
-RESULT_DIR = "results"
+RESULT_DIR = r"D:\UGM\TA\AdaptiveQoS\results"
 
 def get_latest_file(pattern):
     """Fungsi pembantu untuk mencari file terbaru berdasarkan pola nama."""
@@ -18,8 +18,8 @@ def get_latest_file(pattern):
     return max(list_of_files, key=os.path.getmtime)
 
 def main():
-    file_rl = get_latest_file("hasil_evaluasi_wsn_dqn_E500_T1000_*.csv")
-    file_random = get_latest_file("hasil_baseline_random_E500_T1000_*.csv")
+    file_rl = get_latest_file("hasil_evaluasi_wsn_dqn_E1000_T1000_*.csv")
+    file_random = get_latest_file("hasil_baseline_random_E1000_T1000_*.csv")
 #--- UBAH NAMA CSV SESUAI NAMA MODEL---#
     if not file_rl or not file_random:
         print("[ERROR] File data tidak lengkap di folder 'results'.")

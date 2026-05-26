@@ -1,0 +1,115 @@
+[Running] python -u "d:\UGM\TA\AdaptiveQoS\main-rl.py"
+WSN Environment Initialized.
+State Dimension : 7  (termasuk EDF)
+Action Dimension: 15
+EDF Strategy    : curriculum
+Training for 1000 episodes...
+
+Ep   10/1000 | Reward:  302.58 | QoS: 0.875 | Drops:  86 | PSR: 0.8280 | Steps:  500 | Retries: 984 | eps: 0.970 | EDF: 0.05
+Ep   20/1000 | Reward:  299.32 | QoS: 0.880 | Drops:  82 | PSR: 0.8360 | Steps:  500 | Retries: 1000 | eps: 0.942 | EDF: 0.10
+Ep   30/1000 | Reward:  307.89 | QoS: 0.885 | Drops:  79 | PSR: 0.8420 | Steps:  500 | Retries: 957 | eps: 0.914 | EDF: 0.16
+Ep   40/1000 | Reward:  268.96 | QoS: 0.870 | Drops:  89 | PSR: 0.8220 | Steps:  500 | Retries: 1151 | eps: 0.887 | EDF: 0.28
+Ep   50/1000 | Reward:  317.62 | QoS: 0.882 | Drops:  81 | PSR: 0.8380 | Steps:  500 | Retries: 909 | eps: 0.861 | EDF: 0.00
+Ep   60/1000 | Reward:  324.99 | QoS: 0.906 | Drops:  64 | PSR: 0.8720 | Steps:  500 | Retries: 871 | eps: 0.835 | EDF: 0.20
+Ep   70/1000 | Reward:  278.37 | QoS: 0.878 | Drops:  83 | PSR: 0.8340 | Steps:  500 | Retries: 1104 | eps: 0.810 | EDF: 0.27
+Ep   80/1000 | Reward:  330.71 | QoS: 0.899 | Drops:  69 | PSR: 0.8620 | Steps:  500 | Retries: 843 | eps: 0.786 | EDF: 0.08
+Ep   90/1000 | Reward:  352.08 | QoS: 0.911 | Drops:  61 | PSR: 0.8780 | Steps:  500 | Retries: 736 | eps: 0.763 | EDF: 0.06
+Ep  100/1000 | Reward:  366.46 | QoS: 0.928 | Drops:  49 | PSR: 0.9020 | Steps:  500 | Retries: 664 | eps: 0.740 | EDF: 0.10
+Ep  110/1000 | Reward:  313.69 | QoS: 0.903 | Drops:  66 | PSR: 0.8680 | Steps:  500 | Retries: 927 | eps: 0.719 | EDF: 0.27
+Ep  120/1000 | Reward:  338.96 | QoS: 0.910 | Drops:  61 | PSR: 0.8780 | Steps:  500 | Retries: 801 | eps: 0.697 | EDF: 0.19
+Ep  130/1000 | Reward:  356.31 | QoS: 0.912 | Drops:  60 | PSR: 0.8800 | Steps:  500 | Retries: 715 | eps: 0.677 | EDF: 0.13
+Ep  140/1000 | Reward:  339.95 | QoS: 0.914 | Drops:  58 | PSR: 0.8840 | Steps:  500 | Retries: 796 | eps: 0.657 | EDF: 0.24
+Ep  150/1000 | Reward:  345.56 | QoS: 0.920 | Drops:  54 | PSR: 0.8920 | Steps:  500 | Retries: 768 | eps: 0.637 | EDF: 0.23
+Ep  160/1000 | Reward:  369.58 | QoS: 0.915 | Drops:  58 | PSR: 0.8840 | Steps:  500 | Retries: 649 | eps: 0.618 | EDF: 0.00
+Ep  170/1000 | Reward:  340.92 | QoS: 0.913 | Drops:  59 | PSR: 0.8820 | Steps:  500 | Retries: 791 | eps: 0.600 | EDF: 0.22
+Ep  180/1000 | Reward:  362.33 | QoS: 0.926 | Drops:  50 | PSR: 0.9000 | Steps:  500 | Retries: 684 | eps: 0.582 | EDF: 0.23
+Ep  190/1000 | Reward:  362.66 | QoS: 0.916 | Drops:  57 | PSR: 0.8860 | Steps:  500 | Retries: 683 | eps: 0.565 | EDF: 0.14
+Ep  200/1000 | Reward:  365.01 | QoS: 0.929 | Drops:  48 | PSR: 0.9040 | Steps:  500 | Retries: 671 | eps: 0.548 | EDF: 0.19
+Ep  210/1000 | Reward:  372.33 | QoS: 0.933 | Drops:  45 | PSR: 0.9100 | Steps:  500 | Retries: 634 | eps: 0.532 | EDF: 0.19
+Ep  220/1000 | Reward:  369.32 | QoS: 0.930 | Drops:  47 | PSR: 0.9060 | Steps:  500 | Retries: 649 | eps: 0.516 | EDF: 0.22
+Ep  230/1000 | Reward:  392.58 | QoS: 0.942 | Drops:  39 | PSR: 0.9220 | Steps:  500 | Retries: 533 | eps: 0.501 | EDF: 0.17
+Ep  240/1000 | Reward:  388.27 | QoS: 0.935 | Drops:  44 | PSR: 0.9120 | Steps:  500 | Retries: 555 | eps: 0.486 | EDF: 0.05
+Ep  250/1000 | Reward:  360.44 | QoS: 0.919 | Drops:  55 | PSR: 0.8900 | Steps:  500 | Retries: 694 | eps: 0.472 | EDF: 0.14
+Ep  260/1000 | Reward:  398.00 | QoS: 0.948 | Drops:  35 | PSR: 0.9300 | Steps:  500 | Retries: 506 | eps: 0.458 | EDF: 0.16
+Ep  270/1000 | Reward:  367.40 | QoS: 0.925 | Drops:  51 | PSR: 0.8980 | Steps:  500 | Retries: 659 | eps: 0.444 | EDF: 0.16
+Ep  280/1000 | Reward:  387.93 | QoS: 0.945 | Drops:  37 | PSR: 0.9260 | Steps:  500 | Retries: 556 | eps: 0.431 | EDF: 0.16
+Ep  290/1000 | Reward:  422.68 | QoS: 0.955 | Drops:  30 | PSR: 0.9400 | Steps:  500 | Retries: 383 | eps: 0.418 | EDF: 0.03
+Ep  300/1000 | Reward:  346.49 | QoS: 0.935 | Drops:  43 | PSR: 0.9140 | Steps:  500 | Retries: 762 | eps: 0.406 | EDF: 0.33
+Ep  310/1000 | Reward:  253.29 | QoS: 0.926 | Drops:  48 | PSR: 0.9040 | Steps:  500 | Retries: 1226 | eps: 0.394 | EDF: 0.59
+Ep  320/1000 | Reward:  355.72 | QoS: 0.959 | Drops:  26 | PSR: 0.9480 | Steps:  500 | Retries: 715 | eps: 0.382 | EDF: 0.46
+Ep  330/1000 | Reward:  321.69 | QoS: 0.948 | Drops:  34 | PSR: 0.9320 | Steps:  500 | Retries: 885 | eps: 0.371 | EDF: 0.49
+Ep  340/1000 | Reward:  380.43 | QoS: 0.950 | Drops:  33 | PSR: 0.9340 | Steps:  500 | Retries: 593 | eps: 0.360 | EDF: 0.33
+Ep  350/1000 | Reward:  423.62 | QoS: 0.959 | Drops:  27 | PSR: 0.9460 | Steps:  500 | Retries: 378 | eps: 0.349 | EDF: 0.12
+Ep  360/1000 | Reward:  362.20 | QoS: 0.952 | Drops:  31 | PSR: 0.9380 | Steps:  500 | Retries: 683 | eps: 0.339 | EDF: 0.38
+Ep  370/1000 | Reward:  407.75 | QoS: 0.955 | Drops:  30 | PSR: 0.9400 | Steps:  500 | Retries: 457 | eps: 0.329 | EDF: 0.16
+Ep  380/1000 | Reward:  397.14 | QoS: 0.969 | Drops:  20 | PSR: 0.9600 | Steps:  500 | Retries: 509 | eps: 0.319 | EDF: 0.28
+Ep  390/1000 | Reward:  295.64 | QoS: 0.954 | Drops:  29 | PSR: 0.9420 | Steps:  500 | Retries: 1014 | eps: 0.310 | EDF: 0.59
+Ep  400/1000 | Reward:  382.38 | QoS: 0.960 | Drops:  26 | PSR: 0.9480 | Steps:  500 | Retries: 583 | eps: 0.301 | EDF: 0.32
+Ep  410/1000 | Reward:  290.75 | QoS: 0.938 | Drops:  40 | PSR: 0.9200 | Steps:  500 | Retries: 1039 | eps: 0.292 | EDF: 0.58
+Ep  420/1000 | Reward:  360.31 | QoS: 0.965 | Drops:  22 | PSR: 0.9560 | Steps:  500 | Retries: 692 | eps: 0.283 | EDF: 0.45
+Ep  430/1000 | Reward:  414.97 | QoS: 0.961 | Drops:  26 | PSR: 0.9480 | Steps:  500 | Retries: 421 | eps: 0.275 | EDF: 0.19
+Ep  440/1000 | Reward:  390.35 | QoS: 0.945 | Drops:  37 | PSR: 0.9260 | Steps:  500 | Retries: 544 | eps: 0.267 | EDF: 0.20
+Ep  450/1000 | Reward:  425.28 | QoS: 0.960 | Drops:  27 | PSR: 0.9460 | Steps:  500 | Retries: 370 | eps: 0.259 | EDF: 0.08
+Ep  460/1000 | Reward:  404.30 | QoS: 0.960 | Drops:  26 | PSR: 0.9480 | Steps:  500 | Retries: 474 | eps: 0.251 | EDF: 0.23
+Ep  470/1000 | Reward:  386.39 | QoS: 0.959 | Drops:  27 | PSR: 0.9460 | Steps:  500 | Retries: 563 | eps: 0.244 | EDF: 0.30
+Ep  480/1000 | Reward:  364.98 | QoS: 0.958 | Drops:  27 | PSR: 0.9460 | Steps:  500 | Retries: 669 | eps: 0.236 | EDF: 0.42
+Ep  490/1000 | Reward:  417.43 | QoS: 0.968 | Drops:  21 | PSR: 0.9580 | Steps:  500 | Retries: 408 | eps: 0.229 | EDF: 0.20
+Ep  500/1000 | Reward:  311.47 | QoS: 0.953 | Drops:  30 | PSR: 0.9400 | Steps:  500 | Retries: 935 | eps: 0.223 | EDF: 0.56
+Ep  510/1000 | Reward:  450.66 | QoS: 0.978 | Drops:  14 | PSR: 0.9720 | Steps:  500 | Retries: 243 | eps: 0.216 | EDF: 0.06
+Ep  520/1000 | Reward:  371.08 | QoS: 0.975 | Drops:  15 | PSR: 0.9700 | Steps:  500 | Retries: 638 | eps: 0.210 | EDF: 0.42
+Ep  530/1000 | Reward:  392.79 | QoS: 0.970 | Drops:  19 | PSR: 0.9620 | Steps:  500 | Retries: 530 | eps: 0.203 | EDF: 0.39
+Ep  540/1000 | Reward:  398.58 | QoS: 0.974 | Drops:  16 | PSR: 0.9680 | Steps:  500 | Retries: 501 | eps: 0.197 | EDF: 0.36
+Ep  550/1000 | Reward:  388.81 | QoS: 0.981 | Drops:  11 | PSR: 0.9780 | Steps:  500 | Retries: 549 | eps: 0.192 | EDF: 0.43
+Ep  560/1000 | Reward:  445.04 | QoS: 0.974 | Drops:  17 | PSR: 0.9660 | Steps:  500 | Retries: 271 | eps: 0.186 | EDF: 0.06
+Ep  570/1000 | Reward:  356.51 | QoS: 0.979 | Drops:  12 | PSR: 0.9760 | Steps:  500 | Retries: 710 | eps: 0.180 | EDF: 0.50
+Ep  580/1000 | Reward:  455.89 | QoS: 0.978 | Drops:  14 | PSR: 0.9720 | Steps:  500 | Retries: 217 | eps: 0.175 | EDF: 0.04
+Ep  590/1000 | Reward:  349.95 | QoS: 0.979 | Drops:  12 | PSR: 0.9760 | Steps:  500 | Retries: 743 | eps: 0.170 | EDF: 0.48
+Ep  600/1000 | Reward:  415.04 | QoS: 0.981 | Drops:  11 | PSR: 0.9780 | Steps:  500 | Retries: 419 | eps: 0.165 | EDF: 0.34
+Ep  610/1000 | Reward:  338.30 | QoS: 0.976 | Drops:  14 | PSR: 0.9720 | Steps:  500 | Retries: 801 | eps: 0.160 | EDF: 0.53
+Ep  620/1000 | Reward:   47.22 | QoS: 0.845 | Drops: 103 | PSR: 0.7940 | Steps:  500 | Retries: 2256 | eps: 0.155 | EDF: 0.84
+Ep  630/1000 | Reward:  443.06 | QoS: 0.984 | Drops:  10 | PSR: 0.9800 | Steps:  500 | Retries: 280 | eps: 0.151 | EDF: 0.22
+Ep  640/1000 | Reward:  393.82 | QoS: 0.973 | Drops:  17 | PSR: 0.9660 | Steps:  500 | Retries: 525 | eps: 0.146 | EDF: 0.39
+Ep  650/1000 | Reward:  352.61 | QoS: 0.975 | Drops:  15 | PSR: 0.9700 | Steps:  500 | Retries: 730 | eps: 0.142 | EDF: 0.53
+Ep  660/1000 | Reward:  -75.47 | QoS: 0.752 | Drops: 168 | PSR: 0.6640 | Steps:  500 | Retries: 2870 | eps: 0.138 | EDF: 0.87
+Ep  670/1000 | Reward:  301.70 | QoS: 0.968 | Drops:  19 | PSR: 0.9620 | Steps:  500 | Retries: 983 | eps: 0.134 | EDF: 0.62
+Ep  680/1000 | Reward:  463.94 | QoS: 0.984 | Drops:  10 | PSR: 0.9800 | Steps:  500 | Retries: 176 | eps: 0.130 | EDF: 0.09
+Ep  690/1000 | Reward:  434.92 | QoS: 0.986 | Drops:   8 | PSR: 0.9840 | Steps:  500 | Retries: 320 | eps: 0.126 | EDF: 0.27
+Ep  700/1000 | Reward:   53.11 | QoS: 0.863 | Drops:  90 | PSR: 0.8200 | Steps:  500 | Retries: 2226 | eps: 0.122 | EDF: 0.83
+Ep  710/1000 | Reward:  461.09 | QoS: 0.987 | Drops:   8 | PSR: 0.9840 | Steps:  500 | Retries: 190 | eps: 0.118 | EDF: 0.09
+Ep  720/1000 | Reward:  425.29 | QoS: 0.985 | Drops:   9 | PSR: 0.9820 | Steps:  500 | Retries: 369 | eps: 0.115 | EDF: 0.25
+Ep  730/1000 | Reward:  269.07 | QoS: 0.954 | Drops:  28 | PSR: 0.9440 | Steps:  500 | Retries: 1146 | eps: 0.112 | EDF: 0.67
+Ep  740/1000 | Reward:  323.25 | QoS: 0.965 | Drops:  21 | PSR: 0.9580 | Steps:  500 | Retries: 876 | eps: 0.108 | EDF: 0.55
+Ep  750/1000 | Reward:  440.18 | QoS: 0.978 | Drops:  14 | PSR: 0.9720 | Steps:  500 | Retries: 295 | eps: 0.105 | EDF: 0.14
+Ep  760/1000 | Reward:  456.81 | QoS: 0.980 | Drops:  13 | PSR: 0.9740 | Steps:  500 | Retries: 212 | eps: 0.102 | EDF: 0.04
+Ep  770/1000 | Reward:  267.30 | QoS: 0.956 | Drops:  27 | PSR: 0.9460 | Steps:  500 | Retries: 1155 | eps: 0.099 | EDF: 0.66
+Ep  780/1000 | Reward:  245.39 | QoS: 0.958 | Drops:  25 | PSR: 0.9500 | Steps:  500 | Retries: 1264 | eps: 0.096 | EDF: 0.71
+Ep  790/1000 | Reward:  -35.97 | QoS: 0.797 | Drops: 136 | PSR: 0.7280 | Steps:  500 | Retries: 2672 | eps: 0.093 | EDF: 0.87
+Ep  800/1000 | Reward:  366.08 | QoS: 0.986 | Drops:   7 | PSR: 0.9860 | Steps:  500 | Retries: 662 | eps: 0.090 | EDF: 0.50
+Ep  810/1000 | Reward:   98.69 | QoS: 0.877 | Drops:  81 | PSR: 0.8380 | Steps:  500 | Retries: 1998 | eps: 0.088 | EDF: 0.81
+Ep  820/1000 | Reward:  431.14 | QoS: 0.983 | Drops:  10 | PSR: 0.9800 | Steps:  500 | Retries: 339 | eps: 0.085 | EDF: 0.31
+Ep  830/1000 | Reward:  440.01 | QoS: 0.991 | Drops:   5 | PSR: 0.9900 | Steps:  500 | Retries: 295 | eps: 0.083 | EDF: 0.26
+Ep  840/1000 | Reward:  338.86 | QoS: 0.974 | Drops:  15 | PSR: 0.9700 | Steps:  500 | Retries: 798 | eps: 0.080 | EDF: 0.58
+Ep  850/1000 | Reward:  433.92 | QoS: 0.985 | Drops:   9 | PSR: 0.9820 | Steps:  500 | Retries: 325 | eps: 0.078 | EDF: 0.26
+Ep  860/1000 | Reward:   63.87 | QoS: 0.865 | Drops:  89 | PSR: 0.8220 | Steps:  500 | Retries: 2172 | eps: 0.075 | EDF: 0.83
+Ep  870/1000 | Reward:  432.60 | QoS: 0.982 | Drops:  11 | PSR: 0.9780 | Steps:  500 | Retries: 332 | eps: 0.073 | EDF: 0.22
+Ep  880/1000 | Reward:  460.34 | QoS: 0.991 | Drops:   5 | PSR: 0.9900 | Steps:  500 | Retries: 194 | eps: 0.071 | EDF: 0.15
+Ep  890/1000 | Reward:  438.63 | QoS: 0.982 | Drops:  11 | PSR: 0.9780 | Steps:  500 | Retries: 302 | eps: 0.069 | EDF: 0.21
+Ep  900/1000 | Reward:  323.91 | QoS: 0.978 | Drops:  12 | PSR: 0.9760 | Steps:  500 | Retries: 872 | eps: 0.067 | EDF: 0.61
+Ep  910/1000 | Reward:  385.72 | QoS: 0.989 | Drops:   5 | PSR: 0.9900 | Steps:  500 | Retries: 564 | eps: 0.065 | EDF: 0.50
+Ep  920/1000 | Reward:  463.89 | QoS: 0.994 | Drops:   3 | PSR: 0.9940 | Steps:  500 | Retries: 176 | eps: 0.063 | EDF: 0.18
+Ep  930/1000 | Reward:   41.30 | QoS: 0.847 | Drops: 102 | PSR: 0.7960 | Steps:  500 | Retries: 2286 | eps: 0.061 | EDF: 0.82
+Ep  940/1000 | Reward:  413.46 | QoS: 0.988 | Drops:   6 | PSR: 0.9880 | Steps:  500 | Retries: 426 | eps: 0.059 | EDF: 0.38
+Ep  950/1000 | Reward:  357.04 | QoS: 0.987 | Drops:   6 | PSR: 0.9880 | Steps:  500 | Retries: 707 | eps: 0.058 | EDF: 0.54
+Ep  960/1000 | Reward:  466.57 | QoS: 0.991 | Drops:   5 | PSR: 0.9900 | Steps:  500 | Retries: 163 | eps: 0.056 | EDF: 0.08
+Ep  970/1000 | Reward:  208.86 | QoS: 0.947 | Drops:  32 | PSR: 0.9360 | Steps:  500 | Retries: 1446 | eps: 0.054 | EDF: 0.74
+Ep  980/1000 | Reward:  422.80 | QoS: 0.989 | Drops:   6 | PSR: 0.9880 | Steps:  500 | Retries: 380 | eps: 0.053 | EDF: 0.34
+Ep  990/1000 | Reward:  245.36 | QoS: 0.955 | Drops:  27 | PSR: 0.9460 | Steps:  500 | Retries: 1264 | eps: 0.051 | EDF: 0.69
+Ep 1000/1000 | Reward:  422.02 | QoS: 0.986 | Drops:   8 | PSR: 0.9840 | Steps:  500 | Retries: 384 | eps: 0.050 | EDF: 0.34
+
+Training selesai!
+  PTH : models\wsn_dqn_E1000_T500_20260526_091848.pth
+  CSV : logs\train_log_wsn_dqn_E1000_T500_20260526_091848.csv
+  PNG : results\plot_wsn_dqn_E1000_T500_20260526_091848.png
+
+[Done] exited with code=0 in 718.022 seconds
+

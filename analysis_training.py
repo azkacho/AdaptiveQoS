@@ -404,7 +404,7 @@ def evaluate_best_model(models_dict, output_dir):
 
 def main():
     print("=" * 60)
-    print("Sub-analisis 5.1 — Konvergensi Training")
+    print("Analisis — Konvergensi Training Model Adaptive QoS (DQN)")
     print("=" * 60)
 
     # Load semua training logs
