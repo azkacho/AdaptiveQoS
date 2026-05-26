@@ -108,7 +108,8 @@ if __name__ == "__main__":
 
     agent = DQNAgent(state_dim, action_dim)
 
-    history = {'rewards': [], 'avg_qos': [], 'drops': [], 'retries': [], 'edf': []}
+    history = {'rewards': [], 'avg_qos': [], 'drops': [], 'retries': [], 'edf': [],
+               'psr': [], 'steps_taken': []}  # PSR dan steps_taken dicatat per episode
 
     # Setup direktori output
     for d in ["models", "logs", "results"]:
@@ -119,12 +120,14 @@ if __name__ == "__main__":
     model_path = os.path.join("models", f"{base_name}.pth")
     csv_path   = os.path.join("logs",   f"train_log_{base_name}.csv")
 
-    # [BARU] Kolom EDF_Episode ditambahkan agar konvergensi per fase bisa divisualisasi
+    # Header CSV — Steps_Taken dan PSR ditambahkan untuk analisis yang valid
     with open(csv_path, mode='w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow([
             'Episode', 'Reward', 'Avg_QoS', 'Drops', 'Retries', 'Epsilon',
-            'EDF_Episode'   # [BARU] nilai EDF yang digunakan pada episode ini
+            'EDF_Episode',
+            'Steps_Taken',  # langkah aktual per episode (bisa < TIMESTEPS_PER_EPISODE)
+            'PSR',          # = 1 - (Drops / Steps_Taken), dihitung di sini bukan di luar
         ])
 
     for e in range(NUM_EPISODES):
@@ -135,18 +138,31 @@ if __name__ == "__main__":
         ep_retries    = 0
         ep_drops      = 0
 
+        steps_taken = 0  # jumlah langkah aktual dalam episode ini
+
         for t in range(TIMESTEPS_PER_EPISODE):
             action = agent.act(state)
             next_state, reward, terminated, truncated, info = env.step(action)
 
-            done = terminated or truncated
-            agent.remember(state, action, reward, next_state, terminated)
-            state        = next_state
+            drop_occurred = info.get('dropped', False)
+
+            # ── Pastikan drop tidak terminasi episode ────────────────────────────
+            # wsn_rl_env.py sudah difix: is_dropped → terminated=False
+            # Override ini tetap dipertahankan sebagai safety net — jika env
+            # di-update di luar dan tidak sengaja mengembalikan terminated=True
+            # pada drop, training loop di sini tetap aman.
+            is_true_terminal = terminated and not drop_occurred
+
+            done = is_true_terminal or truncated
+            agent.remember(state, action, reward, next_state, is_true_terminal)
+
+            state         = next_state
             total_reward += reward
+            steps_taken  += 1
 
             ep_qos_scores.append(info.get('S_QoS', 0))
             ep_retries   += info.get('retries', 0)
-            if info.get('dropped', False):
+            if drop_occurred:
                 ep_drops += 1
 
             agent.replay()
@@ -158,28 +174,39 @@ if __name__ == "__main__":
 
         avg_qos = np.mean(ep_qos_scores) if ep_qos_scores else 0
 
+        # PSR dihitung dari steps aktual, bukan konstanta TIMESTEPS_PER_EPISODE
+        # Formula: PSR = 1 - (ep_drops / steps_taken)
+        # steps_taken = langkah nyata yang dijalankan (bisa < TIMESTEPS_PER_EPISODE
+        # jika true terminal terjadi lebih awal)
+        psr = 1.0 - (ep_drops / steps_taken) if steps_taken > 0 else 1.0
+
         with open(csv_path, mode='a', newline='') as f:
             writer = csv.writer(f)
             writer.writerow([
                 e + 1, total_reward, avg_qos, ep_drops, ep_retries,
-                agent.epsilon, round(episode_edf, 4)   # [BARU]
+                agent.epsilon, round(episode_edf, 4),
+                steps_taken,
+                round(psr, 6),
             ])
 
         history['rewards'].append(total_reward)
         history['avg_qos'].append(avg_qos)
         history['drops'].append(ep_drops)
         history['retries'].append(ep_retries)
-        history['edf'].append(episode_edf)          # [BARU]
+        history['edf'].append(episode_edf)
+        history['psr'].append(psr)
+        history['steps_taken'].append(steps_taken)
 
         if (e + 1) % 10 == 0:
-            # [BARU] Tampilkan EDF di log konsol
             print(f"Ep {e+1:4d}/{NUM_EPISODES} | "
                   f"Reward: {total_reward:7.2f} | "
                   f"QoS: {avg_qos:.3f} | "
-                  f"Drops: {ep_drops:2d} | "
+                  f"Drops: {ep_drops:3d} | "
+                  f"PSR: {psr:.4f} | "
+                  f"Steps: {steps_taken:4d} | "
                   f"Retries: {ep_retries:3d} | "
                   f"eps: {agent.epsilon:.3f} | "
-                  f"EDF: {episode_edf:.2f}")   # [BARU]
+                  f"EDF: {episode_edf:.2f}")
 
     # --- 4. Simpan Model & Plot ---
     torch.save(agent.model.state_dict(), model_path)
@@ -202,9 +229,16 @@ if __name__ == "__main__":
     plt.ylabel('Retries')
 
     plt.subplot(5, 1, 4)
-    plt.plot(history['drops'], color='red')
-    plt.title('Packet Drops per Episode')
-    plt.ylabel('Drops')
+    plt.plot(history['psr'], color='green', linewidth=0.8, alpha=0.5)
+    # Moving average PSR agar tren lebih jelas
+    window = min(10, len(history['psr']))
+    psr_smooth = np.convolve(history['psr'], np.ones(window)/window, mode='valid')
+    plt.plot(range(window - 1, len(history['psr'])), psr_smooth, color='green', linewidth=2)
+    plt.axhline(y=0.95, color='red', linestyle='--', linewidth=0.8, label='PSR 0.95')
+    plt.title('Packet Success Rate (PSR) per Episode  —  PSR = 1 - Drops/Steps_Taken')
+    plt.ylabel('PSR')
+    plt.ylim(0, 1.05)
+    plt.legend(fontsize=8)
 
     # [BARU] Plot EDF per episode untuk verifikasi distribusi training
     plt.subplot(5, 1, 5)

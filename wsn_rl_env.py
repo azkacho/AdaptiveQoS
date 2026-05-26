@@ -12,7 +12,6 @@ from config_rl import (
     PACKET_SIZE_BITS, PACKET_ARRIVAL_RATE, TIMESTEPS_PER_EPISODE,
     MAX_RETRANSMISSIONS, PENALTY_DROP, ALPHA, BETA,
     QOS_WEIGHTS, MAX_EXPECTED_LATENCY, INITIAL_ENERGY_JOULE, RANDOM_SEED,
-    # [BARU] Import parameter EDF training
     EDF_TRAIN_MAX, EDF_TRAIN_STRATEGY, EDF_CURRICULUM_PHASES
 )
 
@@ -34,6 +33,8 @@ class WSN_RL_Env(gym.Env):
 
     def __init__(self):
         super(WSN_RL_Env, self).__init__()
+
+        self.max_comm_distance = MAX_COMM_DISTANCE
 
         self.num_nodes    = NUM_NODES
         self.positions    = {}
@@ -231,18 +232,35 @@ class WSN_RL_Env(gym.Env):
         )
 
         if is_dropped:
-            reward     = -PENALTY_DROP
-            terminated = True
+            # ── Drop: sinyal negatif terkuat, tapi BUKAN terminal state ─────────
+            # terminated = False → episode lanjut ke t+1
+            # Efek Bellman: Q(s,a) ← -1.0 + γ·max Q(s',a')
+            #   → agen tahu ada masa depan setelah drop, dan belajar hindari drop
+            #   berikutnya (bukan hanya menghindari state saat drop terjadi).
+            # Nilai -1.0 selalu lebih buruk dari kondisi retry terparah:
+            #   retry_ratio → 1 ⟹ reward → -MAX_RETRANS/(MAX_RETRANS) = -1.0
+            #   tapi drop terjadi SETELAH batas retry, jadi hard-coded -1.0 < semua retry
+            reward     = -1.0
+            terminated = False
+
         else:
-            bonus              = BETA * S_QoS
-            penalty_base       = math.exp(ALPHA * num_retries) - 1
-            context_multiplier = 2.0 - S_QoS
-            reward             = bonus - (penalty_base * context_multiplier)
-            terminated         = False
+            # ── Non-drop: reward self-normalized dalam range (-1, +S_QoS] ───────
+            # Formula: reward = S_QoS*(1 - retry_ratio) - retry_ratio
+            #
+            # Properti kunci:
+            #   • 0 retries → reward = S_QoS ∈ [0, 1]     (terbaik)
+            #   • MAX-1 retries, QoS=0.5 → reward ≈ -0.70  (buruk tapi > -1.0)
+            #   • Drop (di atas) → reward = -1.0            (terburuk)
+            # Urutan terjamin: drop < max_retry < ... < 0_retry
+            # Tidak bergantung pada ALPHA/BETA — stabil di berbagai konfigurasi
+            retry_ratio = num_retries / MAX_RETRANSMISSIONS   # ∈ [0, 1)
+            reward      = S_QoS * (1.0 - retry_ratio) - retry_ratio
+            terminated  = False
 
         if current_energy <= 0:
+            # ── Energi habis: satu-satunya true terminal state ───────────────────
             terminated = True
-            reward    -= 50
+            reward    -= 1.0   # penalti tambahan, proporsional skala baru
 
         truncated = self.current_step_count >= TIMESTEPS_PER_EPISODE
         self.current_node_id = random.choice(list(self.node_states.keys()))

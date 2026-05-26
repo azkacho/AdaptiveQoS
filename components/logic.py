@@ -130,6 +130,11 @@ def get_logic_state(current_positions, node_data, old_routing_data,
     new_routing_data = {}
     events           = []
 
+    total_tx = 0
+    total_drops = 0
+    total_retries = 0
+    dr_counts = {'high': 0, 'medium': 0, 'low': 0}
+
     visual_range = override_range if override_range else MAX_COMM_DISTANCE
     current_edf  = edf_val if edf_val is not None else 0.0
 
@@ -215,6 +220,10 @@ def get_logic_state(current_positions, node_data, old_routing_data,
 
         env.current_node_id = i
         env.edf = current_edf
+
+        if override_range is not None:
+            env.max_comm_distance = override_range
+
         state, _ = env._get_state_for_node(i)
 
         if mode_val == 'AI' and model is not None:
@@ -226,6 +235,24 @@ def get_logic_state(current_positions, node_data, old_routing_data,
 
         parent_id, data_rate_bps, dr_key = env._decode_action(action)
         _, _, _, _, info = env.step_for_node(s_i, action, node_data)
+
+        # MULAI BLOK AKUMULASI METRIK (REVISI FINAL)
+        total_tx += 1
+        
+        if info.get('dropped', False):
+            total_drops += 1
+                    
+        total_retries += info.get('retries', 0)
+
+        if "high" in dr_key:
+            dr_counts['high'] += 1
+        elif "medium" in dr_key:
+            dr_counts['medium'] += 1
+        elif "low" in dr_key:
+            dr_counts['low'] += 1
+        # AKHIR BLOK AKUMULASI METRIK
+
+        is_alive = True
 
         is_alive = True
         if str(parent_id) != 'sink' and parent_id is not None:
@@ -255,8 +282,12 @@ def get_logic_state(current_positions, node_data, old_routing_data,
                 'classes': 'active-edge'
             })
             new_routing_data[s_i] = {
-                'parent': parent_id, 'dr': dr_key,
-                'dist':   dist_real, 'alive': True
+                'parent': parent_id, 
+                'dr': dr_key,
+                'dist':   dist_real, 
+                'alive': True,
+                'dropped': info.get('dropped', False),  
+                'retries': info.get('retries', 0)
             }
             if s_i in old_routing_data:
                 prev_p = old_routing_data[s_i].get('parent')
@@ -269,7 +300,7 @@ def get_logic_state(current_positions, node_data, old_routing_data,
                 events.append(f" Node {s_i} lost connection")
             new_routing_data[s_i] = {
                 'parent':      None,
-                'alive':       False,
+                'alive':       True,
                 'dropped':     True,
                 'retries':     0,
                 'dead_logged': True
@@ -277,4 +308,16 @@ def get_logic_state(current_positions, node_data, old_routing_data,
 
     avg_eng = total_energy / NUM_NODES
     avg_sig = total_signal / active_nodes if active_nodes > 0 else 0
-    return elements, avg_eng, avg_sig, new_routing_data, events
+    psr_value = (total_tx - total_drops) * 100.0 / total_tx if total_tx > 0 else 0
+    avg_retries = total_retries / total_tx if total_tx > 0 else 0
+    dominant_dr = max(dr_counts, key=dr_counts.get) if total_tx > 0 else 'N/A'
+    networks_metrics =  {
+        'psr':          psr_value,
+        'avg_retries':  avg_retries,
+        'dominant_dr':  dominant_dr,
+        'total_tx':     total_tx,
+        'total_drops':  total_drops,
+        'total_retries':total_retries,
+        'dr_counts':    dr_counts,
+}
+    return elements, avg_eng, avg_sig, new_routing_data, events, networks_metrics  

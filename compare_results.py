@@ -18,8 +18,8 @@ def get_latest_file(pattern):
     return max(list_of_files, key=os.path.getmtime)
 
 def main():
-    file_rl = get_latest_file("hasil_evaluasi_wsn_dqn_E1000_T500_*.csv")
-    file_random = get_latest_file("hasil_baseline_random_E1000_T500_*.csv")
+    file_rl = get_latest_file("hasil_evaluasi_wsn_dqn_E500_T1000_*.csv")
+    file_random = get_latest_file("hasil_baseline_random_E500_T1000_*.csv")
 #--- UBAH NAMA CSV SESUAI NAMA MODEL---#
     if not file_rl or not file_random:
         print("[ERROR] File data tidak lengkap di folder 'results'.")

@@ -10,7 +10,7 @@ Output : analysis_output/01_training_convergence/
 
 Cara pakai:
     Jalankan dari root folder project:
-    python analysis_5_1_training.py
+    python analysis_training.py
 
     Jika logs/ ada di lokasi lain, ubah LOG_DIR di bawah.
 """
@@ -23,12 +23,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import matplotlib as mpl
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 from pathlib import Path
 
 # ── Konfigurasi Path ─────────────────────────────────────────────────────────
 BASE_DIR   = Path(__file__).parent
 LOG_DIR    = BASE_DIR / "logs"
-OUTPUT_DIR = BASE_DIR / "analysis_output" / "01_training_convergence"
+OUTPUT_DIR = BASE_DIR / "analysis_output" / "training_convergence"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # ── Konfigurasi Figure (Format Akademis) ─────────────────────────────────────
@@ -346,6 +348,55 @@ def build_summary_table(models: dict, output_path: Path) -> pd.DataFrame:
     print(df_summary.to_string(index=False))
     return df_summary
 
+# ── FUNGSI PENILAIAN MODEL TERBAIK ───────────────────────────────────────────
+def evaluate_best_model(models_dict, output_dir):
+    print("\n[5/5] Menganalisis dan Mencari Model Terbaik (Berdasarkan 50 Episode Terakhir)...")
+    results = []
+    
+    for model_name, df in models_dict.items():
+        # Kita ambil 50 episode terakhir karena di sinilah AI seharusnya sudah "Konvergen" (Pintar)
+        last_50_episodes = df.tail(50)
+        
+        # Ujian Mental: Kita fokus pada performa AI saat lingkungan sedang BURUK (EDF >= 0.5)
+        if 'EDF_Episode' in last_50_episodes.columns:
+            hard_conditions = last_50_episodes[last_50_episodes['EDF_Episode'] >= 0.5]
+            # Jika secara kebetulan 50 episode terakhir EDF-nya rendah semua, pakai semua data
+            if hard_conditions.empty:
+                hard_conditions = last_50_episodes
+        else:
+            hard_conditions = last_50_episodes
+            
+        # Hitung rata-rata ketahanan (QoS dan PSR) di fase akhir
+        avg_psr = hard_conditions['PSR'].mean()
+        avg_qos = hard_conditions['Avg_QoS'].mean()
+        avg_reward = hard_conditions['Reward'].mean()
+        
+        # Rumus Skor: Menjumlahkan % PSR dan % QoS (Nilai maksimal adalah 200)
+        score = (avg_psr * 100) + (avg_qos * 100)
+        
+        results.append({
+            'Model_Name': model_name,
+            'Total_Score': round(score, 2),
+            'Avg_PSR_Akhir': round(avg_psr, 3),
+            'Avg_QoS_Akhir': round(avg_qos, 3),
+            'Avg_Reward_Akhir': round(avg_reward, 2)
+        })
+    
+    # Jadikan DataFrame dan urutkan dari Skor Tertinggi ke Terendah
+    results_df = pd.DataFrame(results).sort_values(by='Total_Score', ascending=False)
+    
+    # Print ke Terminal
+    print("\n🏆 RANKING MODEL TERBAIK (Ujian Ketahanan EDF Tinggi):")
+    print(results_df.to_string(index=False))
+    
+    # Simpan ke CSV untuk dimasukkan ke Bab 4 Skripsi
+    out_path = output_dir / "tabel_ranking_model_terbaik.csv"
+    results_df.to_csv(out_path, index=False)
+    print(f"\n✅ Data ranking berhasil disimpan ke: {out_path}")
+    
+    return results_df
+# ─────────────────────────────────────────────────────────────────────────────
+
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # 6. MAIN
@@ -392,6 +443,8 @@ def main():
         models,
         OUTPUT_DIR / "tabel1_training_summary.csv"
     )
+
+    evaluate_best_model(models, OUTPUT_DIR)
 
     print("\n" + "=" * 60)
     print(f"[SELESAI] Semua output tersimpan di:")

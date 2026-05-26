@@ -5,6 +5,7 @@ import os
 import re
 
 from dash import Input, Output, State, callback_context, html, no_update
+from dash.exceptions import PreventUpdate
 
 from components.logic import (
     get_logic_state, SCALE,
@@ -26,6 +27,14 @@ LAST_EDF_VAL   = None
 LAST_RANGE_VAL = None
 GLOBAL_STEP    = 0
 MODEL_JUST_SWITCHED = False 
+
+def write_to_log_file(txt_path, message):
+    if txt_path and os.path.exists(txt_path):
+        try:
+            with open(txt_path, 'a', encoding='utf-8') as f:
+                f.write(message + "\n")
+        except Exception:
+            pass
 
 # ── Node drag tracking (untuk deteksi pergeseran node oleh user) ─────────
 # key: node_id (str), value: [x_meter, y_meter] posisi terakhir yang DICATAT
@@ -310,6 +319,9 @@ def register_callbacks(app):
         trigger      = full_trigger.split('.')[0]
         timestamp_now = datetime.datetime.now().strftime("%H:%M:%S")
 
+        if node_data is None and trigger not in ('init', 'btn-reset', 'mode-selector'):
+            raise PreventUpdate
+        
         # ── Tentukan sel_id berdasarkan SUMBER TRIGGER yang tepat ──────────
         # Hanya update sel_id saat user benar-benar memilih node baru
         # Jangan overwrite saat trigger dari wsn-map.elements (re-render biasa)
@@ -402,20 +414,27 @@ def register_callbacks(app):
                 node_data[sel_id]['energy'] = slider_val
 
         if edf_val is not None:
-            if LAST_EDF_VAL is None: LAST_EDF_VAL = edf_val
-            elif LAST_EDF_VAL != edf_val:
-                ev = f"🌩️ EDF/Noise Changed: {LAST_EDF_VAL} -> {edf_val}"
-                user_events.append(ev)
-                current_step_events.append(ev)
+            if LAST_EDF_VAL is None: 
                 LAST_EDF_VAL = edf_val
+            elif LAST_EDF_VAL != edf_val:
+                # HANYA rekam ke log jika pemicunya murni dari pergerakan slider
+                if trigger == 'edf-slider':
+                    ev = f"🌩️ EDF/Noise Changed: {LAST_EDF_VAL} -> {edf_val}"
+                    user_events.append(ev)
+                    current_step_events.append(ev)
+                    LAST_EDF_VAL = edf_val
+                # Jika bukan dari slider (stale requests), diamkan saja.
 
+        # --- PERBAIKAN BUG RANGE ---
         if range_val is not None:
-            if LAST_RANGE_VAL is None: LAST_RANGE_VAL = range_val
-            elif LAST_RANGE_VAL != range_val:
-                ev = f"📡 Radio Range Changed: {LAST_RANGE_VAL}m -> {range_val}m"
-                user_events.append(ev)
-                current_step_events.append(ev)
+            if LAST_RANGE_VAL is None: 
                 LAST_RANGE_VAL = range_val
+            elif LAST_RANGE_VAL != range_val:
+                if trigger == 'range-slider':
+                    ev = f"📡 Radio Range Changed: {LAST_RANGE_VAL} -> {range_val}m"
+                    user_events.append(ev)
+                    current_step_events.append(ev)
+                    LAST_RANGE_VAL = range_val
 
         # --- Sync posisi ---
         current_positions = pos_data.copy() if pos_data else {}
@@ -471,7 +490,7 @@ def register_callbacks(app):
                     del _DRAG_CHANGED_AT_STEP[nid]
 
         # --- Logika AI / Greedy ---
-        elements, avg_e, avg_s, new_route, new_system_events = get_logic_state(
+        elements, avg_e, avg_s, new_route, new_system_events, networks_metrics = get_logic_state(
             current_positions, node_data, old_route, range_val, edf_val, mode_val,
             sel_id=sel_id   # ← teruskan sel_id untuk highlight di map
         )
@@ -508,6 +527,12 @@ def register_callbacks(app):
             elif "dipindahkan" in ev: icon = "📍"
             elif "switched"    in ev: icon = "🔁"
             txt = f"[{timestamp_now}] {ev}" if icon in ev else f"[{timestamp_now}] {icon} {ev}"
+            
+            write_to_log_file(LOG_TXT_PATH, txt)  # Simpan ke file TXT
+
+            if any(kw in ev for kw in UI_SKIP_KEYWORDS):
+                continue   # ← abaikan dari UI log
+
             log_data.append(txt)
         log_data = log_data[-100:]
 
@@ -550,19 +575,9 @@ def register_callbacks(app):
                     history[k] = history[k][-MAX_HIST:]
 
         # --- CSV / TXT logging ---
-        total_tx = total_drop = total_ret = 0
-        dr_counts = {'high': 0, 'medium': 0, 'low': 0}
-        for nid, r_info in new_route.items():
-            if r_info.get('alive') and r_info.get('parent') is not None:
-                total_tx += 1
-                if r_info.get('dropped', False): total_drop += 1
-                total_ret += r_info.get('retries', 0)
-                dr = r_info.get('dr', 'medium')
-                if dr in dr_counts: dr_counts[dr] += 1
-
-        psr_value   = ((total_tx - total_drop) / total_tx * 100) if total_tx > 0 else 0.0
-        avg_retries = total_ret / total_tx if total_tx > 0 else 0.0
-        dominant_dr = max(dr_counts, key=dr_counts.get) if total_tx > 0 else 'none'
+        psr_value = networks_metrics['psr']
+        avg_retries = networks_metrics['avg_retries']
+        dominant_dr = networks_metrics['dominant_dr']
         model_name  = get_active_model_info().get('name', 'N/A')
         dead_nodes  = sum(1 for n in node_data.values() if n['energy'] <= 0)
 
