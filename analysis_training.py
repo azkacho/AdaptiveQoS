@@ -348,54 +348,96 @@ def build_summary_table(models: dict, output_path: Path) -> pd.DataFrame:
     print(df_summary.to_string(index=False))
     return df_summary
 
-# ── FUNGSI PENILAIAN MODEL TERBAIK ───────────────────────────────────────────
 def evaluate_best_model(models_dict, output_dir):
-    print("\n[5/5] Menganalisis dan Mencari Model Terbaik (Berdasarkan 50 Episode Terakhir)...")
-    results = []
-    
+    """
+    MCDM dengan min-max scaling antar model.
+    Drops dan Retries dinormalisasi relatif terhadap rentang historis seluruh model,
+    bukan diasumsikan dalam skala [0,1].
+    """
+    print("\n[5/5] Menganalisis Model — Heuristic MCDM (QoS Hierarchy, min-max scaling)...")
+
+    WEIGHTS = {'qos': 0.40, 'drops': 0.30, 'retries': 0.20, 'steps': 0.10}
+    assert abs(sum(WEIGHTS.values()) - 1.0) < 1e-9
+
+    # ── Pass 1: kumpulkan nilai mentah semua model ────────────────────────────
+    raw = {}
     for model_name, df in models_dict.items():
-        # Kita ambil 50 episode terakhir karena di sinilah AI seharusnya sudah "Konvergen" (Pintar)
-        last_50_episodes = df.tail(50)
-        
-        # Ujian Mental: Kita fokus pada performa AI saat lingkungan sedang BURUK (EDF >= 0.5)
-        if 'EDF_Episode' in last_50_episodes.columns:
-            hard_conditions = last_50_episodes[last_50_episodes['EDF_Episode'] >= 0.5]
-            # Jika secara kebetulan 50 episode terakhir EDF-nya rendah semua, pakai semua data
-            if hard_conditions.empty:
-                hard_conditions = last_50_episodes
+        last_50 = df.tail(50)
+        if 'EDF_Episode' in last_50.columns:
+            hard = last_50[last_50['EDF_Episode'] >= 0.5]
+            if hard.empty:
+                hard = last_50
         else:
-            hard_conditions = last_50_episodes
-            
-        # Hitung rata-rata ketahanan (QoS dan PSR) di fase akhir
-        avg_psr = hard_conditions['PSR'].mean()
-        avg_qos = hard_conditions['Avg_QoS'].mean()
-        avg_reward = hard_conditions['Reward'].mean()
-        
-        # Rumus Skor: Menjumlahkan % PSR dan % QoS (Nilai maksimal adalah 200)
-        score = (avg_psr * 100) + (avg_qos * 100)
-        
+            hard = last_50
+
+        raw[model_name] = {
+            'qos'     : hard['Avg_QoS'].mean(),
+            'drops'   : hard['Drops'].mean(),
+            'retries' : hard['Retries'].mean() if 'Retries' in hard.columns else 0.0,
+            'steps'   : hard['Steps'].mean()   if 'Steps'   in hard.columns else 0.0,
+            'reward'  : hard['Reward'].mean(),
+        }
+
+    # ── Hitung batas min-max dari seluruh populasi model ─────────────────────
+    # (normalisasi lintas-model agar perbandingan adil)
+    all_qos     = [v['qos']     for v in raw.values()]
+    all_drops   = [v['drops']   for v in raw.values()]
+    all_retries = [v['retries'] for v in raw.values()]
+    all_steps   = [v['steps']   for v in raw.values()]
+
+    def minmax_norm(val, mn, mx):
+        """Normalisasi ke [0,1]. Jika semua nilai sama, kembalikan 1.0 (tidak ada perbedaan)."""
+        if mx == mn:
+            return 1.0
+        return float(np.clip((val - mn) / (mx - mn), 0.0, 1.0))
+
+    # ── Pass 2: hitung skor MCDM per model ───────────────────────────────────
+    results = []
+    for model_name, v in raw.items():
+        # QoS : higher is better → normalisasi langsung
+        norm_qos     = minmax_norm(v['qos'],     min(all_qos),     max(all_qos))
+
+        # Drops / Retries / Steps : lower is better → inversi setelah min-max
+        norm_drops   = 1.0 - minmax_norm(v['drops'],   min(all_drops),   max(all_drops))
+        norm_retries = 1.0 - minmax_norm(v['retries'], min(all_retries), max(all_retries))
+        norm_steps   = 1.0 - minmax_norm(v['steps'],   min(all_steps),   max(all_steps))
+
+        mcdm_score = (
+            norm_qos     * WEIGHTS['qos']     +
+            norm_drops   * WEIGHTS['drops']   +
+            norm_retries * WEIGHTS['retries'] +
+            norm_steps   * WEIGHTS['steps']
+        ) * 100
+
         results.append({
-            'Model_Name': model_name,
-            'Total_Score': round(score, 2),
-            'Avg_PSR_Akhir': round(avg_psr, 3),
-            'Avg_QoS_Akhir': round(avg_qos, 3),
-            'Avg_Reward_Akhir': round(avg_reward, 2)
+            'Model_Name'      : model_name,
+            'MCDM_Score'      : round(mcdm_score, 2),
+            'Kontrib_QoS'     : round(norm_qos     * WEIGHTS['qos']     * 100, 2),
+            'Kontrib_Drops'   : round(norm_drops   * WEIGHTS['drops']   * 100, 2),
+            'Kontrib_Retries' : round(norm_retries * WEIGHTS['retries'] * 100, 2),
+            'Kontrib_Steps'   : round(norm_steps   * WEIGHTS['steps']   * 100, 2),
+            'Avg_QoS_raw'     : round(v['qos'],     4),
+            'Avg_Drops_raw'   : round(v['drops'],   4),
+            'Avg_Retries_raw' : round(v['retries'], 4),
+            'Avg_Steps_raw'   : round(v['steps'],   4),
+            'Avg_Reward'      : round(v['reward'],  2),
         })
-    
-    # Jadikan DataFrame dan urutkan dari Skor Tertinggi ke Terendah
-    results_df = pd.DataFrame(results).sort_values(by='Total_Score', ascending=False)
-    
-    # Print ke Terminal
-    print("\n🏆 RANKING MODEL TERBAIK (Ujian Ketahanan EDF Tinggi):")
+
+    results_df = (pd.DataFrame(results)
+                    .sort_values('MCDM_Score', ascending=False)
+                    .reset_index(drop=True))
+    results_df.insert(0, 'Rank', results_df.index + 1)
+
+    print("\n🏆 RANKING MODEL — MCDM (min-max scaling, QoS Hierarchy)")
     print(results_df.to_string(index=False))
-    
-    # Simpan ke CSV untuk dimasukkan ke Bab 4 Skripsi
-    out_path = output_dir / "tabel_ranking_model_terbaik.csv"
+
+    out_path = output_dir / "tabel_ranking_model_mcdm.csv"
     results_df.to_csv(out_path, index=False)
-    print(f"\n✅ Data ranking berhasil disimpan ke: {out_path}")
-    
+    print(f"\n✅ Tersimpan: {out_path}")
+
+    best = results_df.iloc[0]
+    print(f"\n🥇 Model Terbaik : {best['Model_Name']} — {best['MCDM_Score']:.2f}/100")
     return results_df
-# ─────────────────────────────────────────────────────────────────────────────
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
