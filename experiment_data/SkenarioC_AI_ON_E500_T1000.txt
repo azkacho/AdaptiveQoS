@@ -1,0 +1,31 @@
+=== SIMULATION LOG ===
+Mode: AI
+Model: wsn_dqn_E500_T1000_20260526_082639.pth
+Start: 20260530_171736
+
+
+--- Step 0 | 17:17:36 ---
+  🔄 SIMULATION RESET (Mode: AI)
+[17:17:37] 🔋 Auto Drain: ON ✅
+
+--- Step 5 | 17:17:37 ---
+  🔋 Auto Drain: ON ✅
+[17:17:50] 🔻 Node 7: Manual Drain (862J -> 662J)
+
+--- Step 103 | 17:17:50 ---
+  🔻 Node 7: Manual Drain (862J -> 662J)
+[17:17:50] 🔻 Node 7: Manual Drain (661J -> 461J)
+
+--- Step 105 | 17:17:50 ---
+  🔻 Node 7: Manual Drain (661J -> 461J)
+[17:17:50] 🔻 Node 7: Manual Drain (457J -> 257J)
+
+--- Step 107 | 17:17:50 ---
+  🔻 Node 7: Manual Drain (457J -> 257J)
+[17:17:51] 🔻 Node 7: Manual Drain (252J -> 52J)
+
+--- Step 111 | 17:17:51 ---
+  🔻 Node 7: Manual Drain (252J -> 52J)
+[17:17:51] 🔻 Node 7: Manual Drain (48J -> 0J)
+[17:17:51] 💀 Node 7 DIED (Battery Depleted)
+[17:17:51] 🔌  Node 10 lost connection

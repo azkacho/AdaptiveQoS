@@ -8,6 +8,8 @@ sys.path.insert(0, '.')
 import torch
 import torch.nn as nn
 import numpy as np
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 from wsn_rl_env import WSN_RL_Env
 from config_rl import RANDOM_SEED, SOURCE_NODES_COUNT
 
@@ -29,7 +31,7 @@ SEED             = RANDOM_SEED
 
 # ── Load semua model .pth yang tersedia ───────────────────────────────────
 def load_models(env):
-    pth_files = sorted(glob.glob("models/wsn_dqn_E*.pth"))
+    pth_files = sorted(glob.glob("AdaptiveQoS/models/wsn_dqn_E500_T1000*.pth"))
     if not pth_files:
         print("[ERROR] Tidak ada file .pth di folder models/")
         sys.exit(1)
@@ -135,8 +137,7 @@ def main():
     print(f"  Jarak ke SINK= {((px-sink_x)**2+(py-sink_y)**2)**0.5:.1f} m")
     print("=" * 60)
     print("\n[PENTING] Catat angka TARGET_NODE di atas.")
-    print("          Gunakan node ini untuk SEMUA 16 run Skenario C.")
-    print("          Jangan ubah meskipun node terlihat berbeda di tiap model/mode.")
+    print("          Gunakan node ini untuk run Skenario C.")
 
 if __name__ == "__main__":
     main()

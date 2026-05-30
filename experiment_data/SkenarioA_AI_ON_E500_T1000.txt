@@ -1,0 +1,62 @@
+=== SIMULATION LOG ===
+Mode: AI
+Model: wsn_dqn_E500_T1000_20260526_082639.pth
+Start: 20260530_163632
+
+
+--- Step 0 | 16:36:32 ---
+  🔄 SIMULATION RESET (Mode: AI)
+[16:36:32] 🔋 Auto Drain: ON ✅
+
+--- Step 5 | 16:36:32 ---
+  🔋 Auto Drain: ON ✅
+[16:37:34] 💀 Node 44 DIED (Battery Depleted)
+[16:37:34] 💀 Node 45 DIED (Battery Depleted)
+[16:37:35] 💀 Node 35 DIED (Battery Depleted)
+[16:37:35] 🔌  Node 28 lost connection
+[16:37:36] 💀 Node 26 DIED (Battery Depleted)
+[16:37:36] 💀 Node 42 DIED (Battery Depleted)
+[16:37:36] 🔌  Node 16 lost connection
+[16:37:36] 💀 Node 24 DIED (Battery Depleted)
+[16:37:36] 🔌  Node 7 lost connection
+[16:37:36] 🔌  Node 40 lost connection
+[16:37:39] 💀 Node 8 DIED (Battery Depleted)
+[16:37:41] 💀 Node 25 DIED (Battery Depleted)
+[16:37:42] 💀 Node 32 DIED (Battery Depleted)
+[16:37:42] 💀 Node 41 DIED (Battery Depleted)
+[16:37:42] 🔌  Node 31 lost connection
+[16:37:42] 🔌  Node 49 lost connection
+[16:37:42] 💀 Node 4 DIED (Battery Depleted)
+[16:37:44] 💀 Node 27 DIED (Battery Depleted)
+[16:37:45] 💀 Node 23 DIED (Battery Depleted)
+[16:37:45] 💀 Node 43 DIED (Battery Depleted)
+[16:37:45] 🔌  Node 29 lost connection
+[16:37:46] 💀 Node 1 DIED (Battery Depleted)
+[16:37:46] 💀 Node 5 DIED (Battery Depleted)
+[16:37:47] 💀 Node 12 DIED (Battery Depleted)
+[16:37:48] 💀 Node 30 DIED (Battery Depleted)
+[16:37:48] 💀 Node 15 DIED (Battery Depleted)
+[16:37:52] 💀 Node 13 DIED (Battery Depleted)
+[16:37:54] 💀 Node 3 DIED (Battery Depleted)
+[16:37:54] 🔌  Node 9 lost connection
+[16:37:55] 💀 Node 17 DIED (Battery Depleted)
+[16:37:56] 💀 Node 21 DIED (Battery Depleted)
+[16:37:56] 🔌  Node 22 lost connection
+[16:37:56] 🔌  Node 47 lost connection
+[16:37:56] 💀 Node 10 DIED (Battery Depleted)
+[16:38:05] 💀 Node 14 DIED (Battery Depleted)
+[16:38:05] 💀 Node 34 DIED (Battery Depleted)
+[16:38:05] 🔌  Node 11 lost connection
+[16:38:06] 💀 Node 6 DIED (Battery Depleted)
+[16:38:11] 💀 Node 0 DIED (Battery Depleted)
+[16:38:11] 🔌  Node 20 lost connection
+[16:38:11] 💀 Node 19 DIED (Battery Depleted)
+[16:38:11] 🔌  Node 18 lost connection
+[16:38:13] 💀 Node 33 DIED (Battery Depleted)
+[16:38:24] 💀 Node 37 DIED (Battery Depleted)
+[16:38:25] 💀 Node 36 DIED (Battery Depleted)
+[16:38:25] 💀 Node 46 DIED (Battery Depleted)
+[16:38:34] 💀 Node 39 DIED (Battery Depleted)
+[16:38:39] 💀 Node 2 DIED (Battery Depleted)
+[16:38:41] 💀 Node 38 DIED (Battery Depleted)
+[16:38:41] 💀 Node 48 DIED (Battery Depleted)

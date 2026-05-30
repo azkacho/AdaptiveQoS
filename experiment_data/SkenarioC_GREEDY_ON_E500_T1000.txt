@@ -1,0 +1,45 @@
+=== SIMULATION LOG ===
+Mode: GREEDY
+Model: wsn_dqn_E500_T1000_20260526_082639.pth
+Start: 20260530_172529
+
+
+--- Step 0 | 17:25:29 ---
+  ⚙️ MODE CHANGED TO GREEDY (Auto-Reset)
+[17:25:30] 🔋 Auto Drain: ON ✅
+
+--- Step 7 | 17:25:30 ---
+  🔋 Auto Drain: ON ✅
+[17:25:43] 🔻 Node 7: Manual Drain (865J -> 665J)
+
+--- Step 103 | 17:25:43 ---
+  🔻 Node 7: Manual Drain (865J -> 665J)
+[17:25:43] 🔻 Node 7: Manual Drain (662J -> 462J)
+
+--- Step 105 | 17:25:43 ---
+  🔻 Node 7: Manual Drain (662J -> 462J)
+[17:25:43] 🔻 Node 7: Manual Drain (461J -> 261J)
+
+--- Step 106 | 17:25:43 ---
+  🔻 Node 7: Manual Drain (461J -> 261J)
+[17:25:43] 🔻 Node 7: Manual Drain (460J -> 260J)
+
+--- Step 108 | 17:25:43 ---
+  🔻 Node 7: Manual Drain (460J -> 260J)
+[17:25:43] 🔻 Node 7: Manual Drain (458J -> 258J)
+
+--- Step 111 | 17:25:43 ---
+  🔻 Node 7: Manual Drain (458J -> 258J)
+[17:25:43] 🔻 Node 7: Manual Drain (257J -> 57J)
+
+--- Step 113 | 17:25:43 ---
+  🔻 Node 7: Manual Drain (257J -> 57J)
+[17:25:44] 🔻 Node 7: Manual Drain (54J -> 0J)
+[17:25:44] 💀 Node 7 DIED (Battery Depleted)
+[17:25:44] 🔌  Node 10 lost connection
+[17:25:44] 🔌  Node 14 lost connection
+[17:25:44] 🔌  Node 18 lost connection
+[17:25:44] 🔌  Node 40 lost connection
+
+--- Step 115 | 17:25:44 ---
+  🔻 Node 7: Manual Drain (54J -> 0J)
