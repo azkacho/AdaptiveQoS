@@ -7,7 +7,7 @@ import math
 
 from config_rl import (
     NUM_NODES, AREA_SIZE, MAX_COMM_DISTANCE, SINK_POSITION,
-    DATA_RATE_THRESHOLDS, WEIGHTS, MAX_BUFFER_CAPACITY,
+    DATA_RATE_THRESHOLDS, MAX_BUFFER_CAPACITY,
     POWER_CONSUMPTION, NUM_PARENT_OPTIONS,
     PACKET_SIZE_BITS, PACKET_ARRIVAL_RATE, TIMESTEPS_PER_EPISODE,
     MAX_RETRANSMISSIONS, PENALTY_DROP, ALPHA, BETA,
@@ -123,7 +123,9 @@ class WSN_RL_Env(gym.Env):
         Pada EDF=0.9, bahkan link fisika bagus (P_fis=0.05) menghasilkan
         P_final = 1 - (0.95 * 0.1) = 0.905 — mendekati kegagalan total.
         """
-        sensitivity_limit = {250_000: 45.0, 1_000_000: 30.0, 2_000_000: 15.0}
+        sensitivity_limit = {250_000: 45.0,
+                             1_000_000: 30.0,
+                             2_000_000: 15.0}
         limit    = sensitivity_limit.get(data_rate, 20.0)
         phys_loss = (0.1 + (distance - limit) * 0.1) if distance > limit \
                     else (0.01 + (distance / limit) * 0.05)
@@ -132,7 +134,7 @@ class WSN_RL_Env(gym.Env):
         degraded_quality = (1.0 - phys_loss) * (1.0 - edf)
         return min(1.0, max(0.0, 1.0 - degraded_quality))
 
-    # ── [BARU] Sampling EDF untuk Training ──────────────────────────────────
+    # ── Sampling EDF untuk Training ──────────────────────────────────
 
     def _sample_training_edf(self) -> float:
         """
@@ -201,6 +203,8 @@ class WSN_RL_Env(gym.Env):
         dist   = self._get_distance(self.current_node_id, parent_id)
 
         # [PERUBAHAN KUNCI] Gunakan self.edf — bukan lagi 0.0
+
+# ___________________ Model Konsumsi Energi dan Relevansi dengan Retransmisi __________
         p_loss = self.calculate_link_quality(dist, data_rate_bps, edf=self.edf)
 
         num_retries = 0
@@ -219,6 +223,9 @@ class WSN_RL_Env(gym.Env):
         self.node_states[self.current_node_id]['energy'] -= energy_spent
         current_energy = self.node_states[self.current_node_id]['energy']
 
+#_______________________________________________________________________________________
+
+#___________________ SQoS Calculation __________________________________________________
         score_rel = 0.0 if is_dropped else 1.0
         score_lat = max(0, 1 - (actual_latency / MAX_EXPECTED_LATENCY))
         score_eng = max(0, current_energy / INITIAL_ENERGY_JOULE)
@@ -230,7 +237,9 @@ class WSN_RL_Env(gym.Env):
         self.last_link_qos_metrics = np.array(
             [p_loss, actual_latency, score_rel, score_eng], dtype=np.float32
         )
+#_______________________________________________________________________________________
 
+#_______________________________ Setelah SQoS Calculation ______________________________
         if is_dropped:
             # ── Drop: sinyal negatif terkuat, tapi BUKAN terminal state ─────────
             # terminated = False → episode lanjut ke t+1

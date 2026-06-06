@@ -22,14 +22,14 @@ DATA_RATE_THRESHOLDS = {
 }
 
 # --- 3. Bobot untuk Fungsi Ganjaran / Biaya ---
-WEIGHTS = {
-    "packet_loss": 5.0,
-    "delay": 3.0,
-    "throughput": 2.0,
-    "rssi": 4.0,
-    "energy_penalty": 10.0,
-    "buffer_penalty": 8.0
-}
+# WEIGHTS = {
+#     "packet_loss": 5.0,
+#     "delay": 3.0,
+#     "throughput": 2.0,
+#     "rssi": 4.0,
+#     "energy_penalty": 10.0,
+#     "buffer_penalty": 8.0
+# } fungsi lama, tidak dipakai lagi karena sudah ada QOS_WEIGHTS yang lebih spesifik dan terintegrasi dalam reward function.
 
 # --- 4. Parameter Dinamis (Buffer & Energi) ---
 MAX_BUFFER_CAPACITY = 100
@@ -39,8 +39,8 @@ PACKET_ARRIVAL_RATE = 0.5
 # --- 5. Parameter QoS & Reward ---
 MAX_RETRANSMISSIONS = 10
 PENALTY_DROP = 100.0
-ALPHA = 0.5
-BETA = 1.0
+#ALPHA = 0.5 (perhitungan lama)
+#BETA = 1.0 (perhitungan lama)
 
 QOS_WEIGHTS = {
     "reliability": 0.7,
