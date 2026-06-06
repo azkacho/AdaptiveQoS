@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lingkungan Pengembangan & Dependensi Penelitian - AdaptiveQoS</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#06090F',      // Dark Space Black
+                            card: '#0D1117',    // GitHub-like Dark Card
+                            border: '#21262D',  // Cool Gray Border
+                            accent: '#58A6FF',  // Sky Blue Glow
+                            green: '#2EA043',   // GitHub Green
+                            purple: '#BC8CFF',  // Indigo/Purple Glow
+                            orange: '#F0883E',  // Amber/Orange
+                            textMuted: '#8B949E'// Slate Gray
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #06090F;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #06090F;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #21262D;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #58A6FF;
+        }
+    </style>
+</head>
+<body class="text-slate-200 min-h-screen flex flex-col antialiased">
+
+    <!-- Header Utama -->
+    <header class="border-b border-brand-border bg-brand-bg/90 backdrop-blur sticky top-0 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-brand-accent/10 text-brand-accent border border-brand-accent/25 tracking-wider uppercase">AdaptiveQoS Research Ecosystem</span>
+                    <h1 class="text-xl font-extrabold tracking-tight text-white">Lingkungan Pengembangan &amp; Dependensi Penelitian</h1>
+                </div>
+                <p class="text-xs text-brand-textMuted mt-1">Struktur arsitektur pengujian simulasi, relasi fungsional script, dan detail muatan dependensi library</p>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="exportToPNG()" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-brand-green hover:bg-emerald-500 text-white transition-all shadow-lg shadow-emerald-950/20 flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path></svg>
+                    Unduh PNG Diagram
+                </button>
+                <button onclick="resetSelection()" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-brand-card hover:bg-slate-800 text-slate-300 transition-all border border-brand-border hover:border-brand-accent/30">
+                    Reset Sorotan
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Kolom Kiri: Struktur Folder Riil AdaptiveQoS (4 Cols) -->
+        <section class="lg:col-span-4 bg-brand-card rounded-xl border border-brand-border p-4 flex flex-col gap-4">
+            <div class="flex items-center justify-between border-b border-brand-border pb-3">
+                <h2 class="text-xs font-bold tracking-wider text-brand-accent uppercase">1. Direktori Penelitian</h2>
+                <span class="text-[10px] text-brand-textMuted font-mono">AdaptiveQoS /</span>
+            </div>
+            
+            <!-- File Tree Explorer Riil -->
+            <div class="space-y-1 text-xs overflow-y-auto max-h-[660px] pr-2">
+                <div class="p-1">
+                    <div class="flex items-center gap-1.5 text-slate-200 font-bold mb-1 font-mono">
+                        <svg class="w-4 h-4 text-amber-500 fill-current" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                        <span>AdaptiveQoS Workspace</span>
+                    </div>
+
+                    <div class="pl-4 space-y-2 border-l border-brand-border ml-2">
+                        
+                        <!-- analysis_output/ -->
+                        <div>
+                            <div class="flex items-center gap-1.5 text-brand-textMuted mb-0.5 font-mono">
+                                <svg class="w-3.5 h-3.5 text-amber-500 fill-current" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                                <span class="text-[11px]">analysis_output/training_convergence/</span>
+                            </div>
+                            <div class="pl-4 border-l border-brand-border/40 ml-1.5 space-y-0.5 text-[11px] text-slate-400 font-mono">
+                                <div id="tree-fig_reward" onclick="selectNode('analysis_training')" class="cursor-pointer hover:text-brand-accent">📄 fig_reward_convergence.png</div>
+                                <div id="tree-fig_qos" onclick="selectNode('analysis_training')" class="cursor-pointer hover:text-brand-accent">📄 fig_qos_epsilon.png</div>
+                                <div id="tree-fig_curriculum" onclick="selectNode('analysis_training')" class="cursor-pointer hover:text-brand-accent">📄 fig_curriculum_edf.png</div>
+                            </div>
+                        </div>
+
+                        <!-- components/ -->
+                        <div>
+                            <div class="flex items-center gap-1.5 text-brand-textMuted mb-0.5 font-mono">
+                                <svg class="w-3.5 h-3.5 text-amber-500 fill-current" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                                <span>components/</span>
+                            </div>
+                            <div class="pl-4 border-l border-brand-border/40 ml-1.5 space-y-0.5 font-mono">
+                                <div id="tree-callbacks" onclick="selectNode('callbacks')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                    <span class="text-teal-400">callbacks.py</span>
+                                    <span class="text-[9px] bg-teal-950/40 text-teal-400 px-1.5 rounded border border-teal-800/30">Callbacks</span>
+                                </div>
+                                <div id="tree-layout" onclick="selectNode('layout')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                    <span class="text-teal-400">layout.py</span>
+                                    <span class="text-[9px] bg-teal-950/40 text-teal-400 px-1.5 rounded border border-teal-800/30">Layout</span>
+                                </div>
+                                <div id="tree-logic" onclick="selectNode('logic')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                    <span class="text-purple-400">logic.py</span>
+                                    <span class="text-[9px] bg-purple-950/40 text-purple-400 px-1.5 rounded border border-purple-800/30">Logic</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- experiments_data/ -->
+                        <div>
+                            <div class="flex items-center gap-1.5 text-brand-textMuted mb-0.5 font-mono">
+                                <svg class="w-3.5 h-3.5 text-amber-500 fill-current" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                                <span>experiments_data/</span>
+                            </div>
+                            <div class="pl-4 border-l border-brand-border/40 ml-1.5 font-mono">
+                                <div id="tree-experiments_data" onclick="selectNode('experiments_data')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                    <span class="text-emerald-400">Skenario_AI_Greedy.csv</span>
+                                    <span class="text-[9px] bg-emerald-950/40 text-emerald-400 px-1.5 rounded border border-emerald-800/30">CSV Logs</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- models/ -->
+                        <div>
+                            <div class="flex items-center gap-1.5 text-brand-textMuted mb-0.5 font-mono">
+                                <svg class="w-3.5 h-3.5 text-amber-500 fill-current" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                                <span>models/</span>
+                            </div>
+                            <div class="pl-4 border-l border-brand-border/40 ml-1.5 font-mono">
+                                <div id="tree-wsn_dqn_model" onclick="selectNode('wsn_dqn_model')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                    <span class="text-amber-400">wsn_dqn_model.pth</span>
+                                    <span class="text-[9px] bg-amber-950/40 text-amber-400 px-1.5 rounded border border-amber-800/30">Weights</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Root Files & Scripts -->
+                        <div class="pt-2 border-t border-brand-border/40 space-y-1 font-mono text-[11px]">
+                            <div id="tree-app" onclick="selectNode('app')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                <span class="text-white font-bold">app.py</span>
+                                <span class="text-[9px] bg-slate-800 text-slate-300 px-1.5 rounded">Dash Server</span>
+                            </div>
+                            <div id="tree-config_rl" onclick="selectNode('config_rl')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                <span class="text-slate-300">config_rl.py</span>
+                                <span class="text-[9px] bg-slate-800 text-slate-400 px-1.5 rounded">Global Conf</span>
+                            </div>
+                            <div id="tree-wsn_rl_env" onclick="selectNode('wsn_rl_env')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                <span class="text-orange-400 font-bold">wsn_rl_env.py</span>
+                                <span class="text-[9px] bg-orange-950/40 text-orange-400 px-1.5 rounded border border-orange-800/30">Gym Env</span>
+                            </div>
+                            <div id="tree-main_rl" onclick="selectNode('main_rl')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                <span class="text-purple-400 font-bold">main-rl.py</span>
+                                <span class="text-[9px] bg-purple-950/40 text-purple-400 px-1.5 rounded border border-purple-800/30">Trainer</span>
+                            </div>
+                            <div id="tree-baseline_random" onclick="selectNode('baseline_random')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                <span class="text-slate-300">baseline_random.py</span>
+                                <span class="text-[9px] bg-slate-800 text-slate-400 px-1.5 rounded">Baseline</span>
+                            </div>
+                            <div id="tree-analysis_training" onclick="selectNode('analysis_training')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                <span class="text-slate-300">analysis_training.py</span>
+                                <span class="text-[9px] bg-slate-800 text-slate-400 px-1.5 rounded">Analysis</span>
+                            </div>
+                            <div id="tree-compare_results" onclick="selectNode('compare_results')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                <span class="text-slate-300">compare_results.py</span>
+                                <span class="text-[9px] bg-slate-800 text-slate-400 px-1.5 rounded">Compare</span>
+                            </div>
+                            <div id="tree-plot_results" onclick="selectNode('plot_results')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                <span class="text-slate-300">plot_results.py</span>
+                                <span class="text-[9px] bg-slate-800 text-slate-400 px-1.5 rounded">Plotter</span>
+                            </div>
+                            <div id="tree-find_central_node" onclick="selectNode('find_central_node')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                <span class="text-slate-400">find_central_node.py</span>
+                                <span class="text-[9px] text-slate-500">MCDM</span>
+                            </div>
+                            <div id="tree-plot_only" onclick="selectNode('plot_only')" class="flex items-center justify-between p-1 rounded hover:bg-slate-800/60 cursor-pointer transition-all">
+                                <span class="text-slate-400">plot_only.py</span>
+                                <span class="text-[9px] text-slate-500">Fast Plot</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kolom Kanan: Peta Arsitektur & Panel Info (8 Cols) -->
+        <section class="lg:col-span-8 flex flex-col gap-6">
+            
+            <!-- Panel Diagram Interaktif SVG -->
+            <div class="bg-brand-card rounded-xl border border-brand-border p-4 flex flex-col gap-3">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-brand-border pb-3 gap-2">
+                    <div>
+                        <h2 class="text-xs font-bold tracking-wider text-brand-accent uppercase">2. Peta Ekosistem Dependensi &amp; Lingkungan Latih</h2>
+                        <p class="text-[10px] text-brand-textMuted mt-0.5 font-mono">Arsitektur korelasi antar modul eksekusi, environment fisik, &amp; pipelines data</p>
+                    </div>
+                    <span class="text-[10px] bg-brand-accent/10 text-brand-accent px-2.5 py-0.5 rounded-full border border-brand-accent/20 font-semibold uppercase">AdaptiveQoS Ecosystem</span>
+                </div>
+                
+                <!-- SVG Area -->
+                <div class="overflow-x-auto w-full py-2">
+                    <div class="min-w-[780px] relative flex justify-center">
+                        <svg id="interactive-svg" width="780" height="500" viewBox="0 0 780 500" class="select-none">
+                            
+                            <!-- DEFINISI GRADIENT & PIN MARKERS -->
+                            <defs>
+                                <linearGradient id="grad-sky" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#58A6FF" stop-opacity="0.3"/>
+                                    <stop offset="100%" stop-color="#1F6FEB" stop-opacity="0.05"/>
+                                </linearGradient>
+                                <linearGradient id="grad-teal" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#39C5BB" stop-opacity="0.3"/>
+                                    <stop offset="100%" stop-color="#115E59" stop-opacity="0.05"/>
+                                </linearGradient>
+                                <linearGradient id="grad-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#BC8CFF" stop-opacity="0.3"/>
+                                    <stop offset="100%" stop-color="#6F2DA8" stop-opacity="0.05"/>
+                                </linearGradient>
+                                <linearGradient id="grad-orange" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#F0883E" stop-opacity="0.3"/>
+                                    <stop offset="100%" stop-color="#9A3412" stop-opacity="0.05"/>
+                                </linearGradient>
+                                <linearGradient id="grad-emerald" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#2EA043" stop-opacity="0.3"/>
+                                    <stop offset="100%" stop-color="#14532D" stop-opacity="0.05"/>
+                                </linearGradient>
+
+                                <!-- Arrow Markers -->
+                                <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                                    <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#30363D" />
+                                </marker>
+                                <marker id="arrow-active" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#58A6FF" />
+                                </marker>
+                            </defs>
+
+                            <!-- GARIS KORELASI PENGEMBANGAN (LINKS) -->
+                            <!-- config_rl ke wsn_rl_env (DASHED) -->
+                            <path id="line-config-env" d="M 120 70 L 120 125" fill="none" stroke="#30363D" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+                            
+                            <!-- config_rl ke main_rl (DASHED) -->
+                            <path id="line-config-main" d="M 195 45 L 340 145" fill="none" stroke="#30363D" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+
+                            <!-- wsn_rl_env ke main_rl & baseline_random (SOLID) -->
+                            <path id="line-env-main" d="M 195 150 L 340 150" fill="none" stroke="#30363D" stroke-width="1.5" marker-end="url(#arrow)"/>
+                            <path id="line-env-base" d="M 195 165 Q 260 170 260 220 L 340 220" fill="none" stroke="#30363D" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                            <!-- main_rl ke models/ (*.pth) (SOLID) -->
+                            <path id="line-main-models" d="M 340 165 Q 240 180 240 310 L 195 310" fill="none" stroke="#30363D" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                            <!-- main_rl & baseline_random ke experiments_data (SOLID) -->
+                            <path id="line-main-exp" d="M 415 170 Q 420 280 340 280 Q 240 280 240 375 L 290 375" fill="none" stroke="#30363D" stroke-width="1.5" marker-end="url(#arrow)"/>
+                            <path id="line-base-exp" d="M 415 235 Q 430 310 395 350" fill="none" stroke="#30363D" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                            <!-- logic.py ke wsn_rl_env & models/ (DASHED/SOLID) -->
+                            <path id="line-logic-env" d="M 480 375 L 195 160" fill="none" stroke="#30363D" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+                            <path id="line-logic-model" d="M 480 375 L 195 315" fill="none" stroke="#30363D" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+
+                            <!-- app.py ke layout, callbacks, logic (SOLID) -->
+                            <path id="line-app-layout" d="M 660 65 L 660 110" fill="none" stroke="#30363D" stroke-width="1.5" marker-end="url(#arrow)"/>
+                            <path id="line-app-callbacks" d="M 660 65 Q 755 65 755 185 L 660 190" fill="none" stroke="#30363D" stroke-width="1.5" marker-end="url(#arrow)"/>
+                            <path id="line-callbacks-logic" d="M 660 215 L 565 350" fill="none" stroke="#30363D" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                            <!-- experiments_data ke analysis_training & compare_results & plot_results (SOLID) -->
+                            <path id="line-exp-analysis" d="M 390 390 L 480 390" fill="none" stroke="#30363D" stroke-width="1.5" marker-end="url(#arrow)"/>
+                            <path id="line-exp-compare" d="M 390 390 Q 410 420 480 435" fill="none" stroke="#30363D" stroke-width="1.5" marker-end="url(#arrow)"/>
+                            <path id="line-exp-plot" d="M 390 390 Q 410 460 480 475" fill="none" stroke="#30363D" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                            <!-- analysis_training ke analysis_output/ (SOLID) -->
+                            <path id="line-analysis-output" d="M 520 405 Q 520 430 395 435" fill="none" stroke="#30363D" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+
+                            <!-- LAYER 1: BASE ENGINE (Kiri Atas) -->
+                            <!-- config_rl.py -->
+                            <g id="node-config_rl" onclick="selectNode('config_rl')" class="cursor-pointer group">
+                                <rect x="45" y="25" width="150" height="45" rx="6" fill="#161B22" stroke="#30363D" stroke-width="1.2" class="transition-all duration-300 group-hover:stroke-slate-400" />
+                                <text x="120" y="44" fill="#E2E8F0" font-size="10.5" font-weight="700" text-anchor="middle" class="code-font pointer-events-none">config_rl.py</text>
+                                <text x="120" y="58" fill="#8B949E" font-size="8" text-anchor="middle" class="pointer-events-none">Kunci parameter global</text>
+                            </g>
+
+                            <!-- wsn_rl_env.py -->
+                            <g id="node-wsn_rl_env" onclick="selectNode('wsn_rl_env')" class="cursor-pointer group">
+                                <rect x="45" y="125" width="150" height="45" rx="6" fill="url(#grad-orange)" stroke="#F0883E" stroke-width="1.5" class="transition-all duration-300 group-hover:stroke-orange-400" />
+                                <text x="120" y="144" fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle" class="code-font pointer-events-none">wsn_rl_env.py</text>
+                                <text x="120" y="158" fill="#FFE3D1" font-size="8" text-anchor="middle" class="pointer-events-none">Fisik &amp; Model Gym Env</text>
+                            </g>
+
+
+                            <!-- LAYER 2: TRAINING PIPELINES (Tengah Atas) -->
+                            <!-- main-rl.py -->
+                            <g id="node-main_rl" onclick="selectNode('main_rl')" class="cursor-pointer group">
+                                <rect x="340" y="125" width="150" height="45" rx="6" fill="url(#grad-purple)" stroke="#BC8CFF" stroke-width="1.5" class="transition-all duration-300 group-hover:stroke-purple-400" />
+                                <text x="415" y="144" fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle" class="code-font pointer-events-none">main-rl.py</text>
+                                <text x="415" y="158" fill="#F2E6FF" font-size="8" text-anchor="middle" class="pointer-events-none">Mesin Pelatihan DQN</text>
+                            </g>
+
+                            <!-- baseline_random.py -->
+                            <g id="node-baseline_random" onclick="selectNode('baseline_random')" class="cursor-pointer group">
+                                <rect x="340" y="195" width="150" height="45" rx="6" fill="#161B22" stroke="#30363D" stroke-width="1.2" class="transition-all duration-300 group-hover:stroke-slate-400" />
+                                <text x="415" y="214" fill="#E2E8F0" font-size="10" font-weight="700" text-anchor="middle" class="code-font pointer-events-none">baseline_random.py</text>
+                                <text x="415" y="228" fill="#8B949E" font-size="8" text-anchor="middle" class="pointer-events-none">Pembanding Random Walk</text>
+                            </g>
+
+
+                            <!-- LAYER 3: DASHBOARD CONTROLLER (Kanan Atas) -->
+                            <!-- app.py -->
+                            <g id="node-app" onclick="selectNode('app')" class="cursor-pointer group">
+                                <rect x="585" y="20" width="150" height="45" rx="6" fill="#161B22" stroke="#30363D" stroke-width="1.2" class="transition-all duration-300 group-hover:stroke-slate-400" />
+                                <text x="660" y="39" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle" class="code-font pointer-events-none">app.py</text>
+                                <text x="660" y="53" fill="#8B949E" font-size="8" text-anchor="middle" class="pointer-events-none">Entry point dashboard web</text>
+                            </g>
+
+                            <!-- layout.py -->
+                            <g id="node-layout" onclick="selectNode('layout')" class="cursor-pointer group">
+                                <rect x="585" y="110" width="150" height="40" rx="6" fill="url(#grad-teal)" stroke="#39C5BB" stroke-width="1.2" class="transition-all duration-300 group-hover:stroke-teal-400" />
+                                <text x="660" y="128" fill="#FFFFFF" font-size="10.5" font-weight="700" text-anchor="middle" class="code-font pointer-events-none">layout.py</text>
+                                <text x="660" y="141" fill="#E0FBF9" font-size="8" text-anchor="middle" class="pointer-events-none">Kerangka mockup &amp; visual</text>
+                            </g>
+
+                            <!-- callbacks.py -->
+                            <g id="node-callbacks" onclick="selectNode('callbacks')" class="cursor-pointer group">
+                                <rect x="585" y="175" width="150" height="40" rx="6" fill="url(#grad-teal)" stroke="#39C5BB" stroke-width="1.2" class="transition-all duration-300 group-hover:stroke-teal-400" />
+                                <text x="660" y="193" fill="#FFFFFF" font-size="10.5" font-weight="700" text-anchor="middle" class="code-font pointer-events-none">callbacks.py</text>
+                                <text x="660" y="206" fill="#E0FBF9" font-size="8" text-anchor="middle" class="pointer-events-none">Interaksi tombol &amp; logging</text>
+                            </g>
+
+
+                            <!-- LAYER 4: ARTIFACTS / STORE (Kiri Bawah) -->
+                            <!-- models/ (*.pth) -->
+                            <g id="node-wsn_dqn_model" onclick="selectNode('wsn_dqn_model')" class="cursor-pointer group">
+                                <rect x="45" y="290" width="150" height="45" rx="6" fill="#161B22" stroke="#E3B341" stroke-width="1.2" class="transition-all duration-300 group-hover:stroke-amber-400" />
+                                <text x="120" y="309" fill="#F8E3A1" font-size="10" font-weight="700" text-anchor="middle" class="code-font pointer-events-none">wsn_dqn_model.pth</text>
+                                <text x="120" y="323" fill="#8B949E" font-size="8" text-anchor="middle" class="pointer-events-none">Bobot Synapse Agen Latih</text>
+                            </g>
+
+                            <!-- experiments_data/ -->
+                            <g id="node-experiments_data" onclick="selectNode('experiments_data')" class="cursor-pointer group">
+                                <rect x="290" y="350" width="100" height="80" rx="8" fill="url(#grad-emerald)" stroke="#2EA043" stroke-width="1.5" class="transition-all duration-300 group-hover:stroke-emerald-400" />
+                                <text x="340" y="380" fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle" class="pointer-events-none">experiments_data/</text>
+                                <text x="340" y="395" fill="#C2FFC2" font-size="9" text-anchor="middle" class="code-font pointer-events-none">.csv / .txt</text>
+                                <text x="340" y="415" fill="#8B949E" font-size="7.5" text-anchor="middle" class="pointer-events-none">Skenario_AI_Greedy</text>
+                            </g>
+
+                            <!-- analysis_output/ -->
+                            <g id="node-analysis_output" class="group">
+                                <rect x="290" y="445" width="100" height="40" rx="6" fill="#161B22" stroke="#30363D" stroke-width="1.2" />
+                                <text x="340" y="463" fill="#E2E8F0" font-size="9.5" font-weight="700" text-anchor="middle" class="pointer-events-none">analysis_output/</text>
+                                <text x="340" y="475" fill="#8B949E" font-size="8" text-anchor="middle" class="pointer-events-none">Skenario_Plots</text>
+                            </g>
+
+
+                            <!-- LAYER 5: DATA ANALYSIS & RESEARCH PROCESSORS (Kanan Bawah) -->
+                            <!-- logic.py -->
+                            <g id="node-logic" onclick="selectNode('logic')" class="cursor-pointer group">
+                                <rect x="480" y="350" width="150" height="45" rx="6" fill="url(#grad-sky)" stroke="#58A6FF" stroke-width="1.5" class="transition-all duration-300 group-hover:stroke-blue-400" />
+                                <text x="555" y="369" fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle" class="code-font pointer-events-none">logic.py</text>
+                                <text x="555" y="383" fill="#D2E7FF" font-size="8" text-anchor="middle" class="pointer-events-none">Kalkulasi rute &amp; metrik</text>
+                            </g>
+
+                            <!-- analysis_training.py -->
+                            <g id="node-analysis_training" onclick="selectNode('analysis_training')" class="cursor-pointer group">
+                                <rect x="480" y="410" width="150" height="25" rx="4" fill="#161B22" stroke="#30363D" stroke-width="1.2" class="transition-all duration-300 group-hover:stroke-slate-400" />
+                                <text x="555" y="426" fill="#E2E8F0" font-size="9" font-weight="600" text-anchor="middle" class="code-font pointer-events-none">analysis_training.py</text>
+                            </g>
+
+                            <!-- compare_results.py -->
+                            <g id="node-compare_results" onclick="selectNode('compare_results')" class="cursor-pointer group">
+                                <rect x="480" y="440" width="150" height="25" rx="4" fill="#161B22" stroke="#30363D" stroke-width="1.2" class="transition-all duration-300 group-hover:stroke-slate-400" />
+                                <text x="555" y="456" fill="#E2E8F0" font-size="9" font-weight="600" text-anchor="middle" class="code-font pointer-events-none">compare_results.py</text>
+                            </g>
+
+                            <!-- plot_results.py -->
+                            <g id="node-plot_results" onclick="selectNode('plot_results')" class="cursor-pointer group">
+                                <rect x="480" y="470" width="150" height="25" rx="4" fill="#161B22" stroke="#30363D" stroke-width="1.2" class="transition-all duration-300 group-hover:stroke-slate-400" />
+                                <text x="555" y="486" fill="#E2E8F0" font-size="9" font-weight="600" text-anchor="middle" class="code-font pointer-events-none">plot_results.py</text>
+                            </g>
+
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Detail Dependensi Modular & Muatan Pustaka -->
+            <div id="detail-panel" class="bg-brand-card rounded-xl border border-brand-border p-5 flex flex-col gap-4 min-h-[280px] transition-all duration-300">
+                <!-- Status Standby -->
+                <div id="placeholder-detail" class="flex flex-col items-center justify-center text-center my-auto py-10">
+                    <svg class="w-10 h-10 text-slate-700 mb-2 animate-pulse" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"></path></svg>
+                    <p class="text-xs font-semibold text-slate-400 font-mono">Daftar Pustaka &amp; Dependensi Eksperimen</p>
+                    <p class="text-[11px] text-brand-textMuted max-w-lg mt-1">Klik pada berkas direktori sebelah kiri atau simpul diagram di atas untuk melacak import library Python riil serta keterkaitan data penelitiannya.</p>
+                </div>
+
+                <!-- Template Konten Detail (Sarat Data Riil dari Screenshots) -->
+                <div id="content-detail" class="hidden space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-brand-border pb-3">
+                        <div>
+                            <span id="detail-type" class="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded font-mono font-semibold"></span>
+                            <h3 id="detail-title" class="text-base font-bold text-white mt-1 font-mono"></h3>
+                        </div>
+                        <div id="detail-category-badge" class="px-2.5 py-1 rounded-full text-[10px] font-bold"></div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Peran Modul dalam Eksperimen:</h4>
+                        <p id="detail-desc" class="text-xs text-slate-300 leading-relaxed"></p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                        <!-- Dependensi Library -->
+                        <div class="bg-brand-bg rounded-lg p-3 border border-brand-border">
+                            <h4 class="text-xs font-semibold uppercase tracking-wider text-brand-accent mb-2 flex items-center gap-1.5 font-mono">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                DEPENDENSI IMPORT REAL
+                            </h4>
+                            <div id="detail-libs" class="flex flex-wrap gap-1.5"></div>
+                        </div>
+
+                        <!-- Parameter / Integrasi Konfigurasi -->
+                        <div class="bg-brand-bg rounded-lg p-3 border border-brand-border">
+                            <h4 class="text-xs font-semibold uppercase tracking-wider text-brand-orange mb-2 flex items-center gap-1.5 font-mono">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                                INTEGRASI INTERNAL
+                            </h4>
+                            <div id="detail-params" class="space-y-1 text-[11px]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-brand-border bg-brand-bg/50 px-6 py-4 text-center text-xs text-brand-textMuted mt-auto font-mono">
+        <p>© 2026 AdaptiveQoS Research Ecosystem - Semarang, Indonesia.</p>
+    </footer>
+
+    <!-- LOGIKA & DATA JAVASCRIPT -->
+    <script>
+        // Database Lengkap dengan seluruh library & dependensi riil dari berkas tangkapan layar
+        const moduleDatabase = {
+            config_rl: {
+                title: "config_rl.py",
+                type: "Konfigurator Eksperimen",
+                category: "Global Variables Provider",
+                badgeClass: "bg-slate-800 text-slate-300 border border-brand-border",
+                desc: "Berkas konfigurasi murni penyuplai parameter global untuk lingkungan latih WSN dan Agen DQN. Berfungsi memastikan konsistensi parameter rute di seluruh pipeline simulasi.",
+                libs: ["Tidak mengimpor library luar (Pure Python)"],
+                params: [
+                    "RANDOM_SEED: Kunci keacak-acakan simulasi",
+                    "NUM_NODES: Jumlah total sensor simpul",
+                    "SOURCE_NODES_COUNT: Sensor pengirim aktif",
+                    "NUM_EPISODES: Iterasi latih maksimal",
+                    "TIMESTEPS_PER_EPISODE: Langkah per episode latih"
+                ],
+                flowConnections: ["config-env", "config-main", "config-logic", "config-layout"]
+            },
+            wsn_rl_env: {
+                title: "wsn_rl_env.py",
+                type: "Simulator Jaringan Fisik",
+                category: "Gymnasium Environment",
+                badgeClass: "bg-orange-500/10 text-orange-400 border border-orange-500/20",
+                desc: "Memodelkan lingkungan fisik WSN menggunakan standar gymnasium API. Mengelola visualisasi sisa energi, packet drop, propagasi sinyal, latensi, dan prioritas antrean EDF.",
+                libs: ["gymnasium as gym", "gymnasium.spaces", "numpy as np", "networkx as nx", "random", "math"],
+                params: [
+                    "SINK_POSITION: Koordinat stasiun utama",
+                    "INITIAL_ENERGY_JOULE: Alokasi baterai node",
+                    "POWER_CONSUMPTION: Konstanta penurunan energi",
+                    "MAX_COMM_DISTANCE: Jarak pancar maksimal",
+                    "QoS_WEIGHTS: Penalti rute tidak efisien"
+                ],
+                flowConnections: ["env-main", "env-base"]
+            },
+            main_rl: {
+                title: "main-rl.py",
+                type: "Algoritma Latih",
+                category: "DQN Training Loop Engine",
+                badgeClass: "bg-purple-500/10 text-purple-400 border border-purple-500/20",
+                desc: "Script utama untuk melatih algoritma Deep Q-Network secara offline. Mengimplementasikan target network, pengalaman memori replay buffer, optimizer Adam, dan menyisipkan hasil bobot ke model biner.",
+                libs: ["gymnasium as gym", "numpy as np", "torch", "torch.nn as nn", "torch.optim as optim", "random", "collections.deque", "matplotlib.pyplot as plt", "datetime", "os", "csv"],
+                params: [
+                    "Learning Rate (Alpha): Langkah optimasi neural network",
+                    "deque(maxlen=...): Replay memory penampung state",
+                    "Loss Calculation: MSE loss reduksi error rute",
+                    "Model Saver: Ekspor berkas .pth dinamis"
+                ],
+                flowConnections: ["main-models", "main-exp"]
+            },
+            baseline_random: {
+                title: "baseline_random.py",
+                type: "Algoritma Pembanding",
+                category: "Baseline Benchmarking Pipeline",
+                badgeClass: "bg-slate-800 text-slate-300 border border-brand-border",
+                desc: "Digunakan sebagai agen acak pembanding untuk mengevaluasi efisiensi rute optimasi DQN. Membaca visual TensorBoard menggunakan EventAccumulator.",
+                libs: ["numpy as np", "matplotlib.pyplot as plt", "os", "pandas as pd", "tensorboard.backend.event_processing.event_accumulator import EventAccumulator", "wsn_rl_env import WSN_RL_Env", "datetime"],
+                params: [
+                    "EventAccumulator: Mengambil visual data training run",
+                    "Random Walk Selector: Keputusan hop murni acak"
+                ],
+                flowConnections: ["base-exp"]
+            },
+            app: {
+                title: "app.py",
+                type: "Dashboard Server UI",
+                category: "Dash Web Controller",
+                badgeClass: "bg-slate-800 text-slate-300 border border-brand-border",
+                desc: "Menginisialisasi web server Dash lokal, memanggil struktur UI modular dari components/layout.py, serta mendaftarkan reaktivitas callbacks.py.",
+                libs: ["dash", "components.layout import create_layout", "components.callbacks import register_callbacks"],
+                params: [
+                    "create_layout: Generator struktur DOM dasbor",
+                    "register_callbacks: Handler input interaksi web"
+                ],
+                flowConnections: ["app-layout", "app-callbacks"]
+            },
+            layout: {
+                title: "components/layout.py",
+                type: "Komponen Kontrol UI",
+                category: "Interface Framework Designer",
+                badgeClass: "bg-teal-500/10 text-teal-400 border border-teal-500/20",
+                desc: "Menyediakan kerangka modular halaman (grid visualisasi topologi, dcc.Store penampung state, dropdown rute, dan grafik status sensor).",
+                libs: ["dash_bootstrap_components", "dash_html_components", "dash_core_components"],
+                params: [
+                    "CSS Grid Styling: Struktur dasbor dinamis",
+                    "Graph components: Visual topologi & status sensor"
+                ],
+                flowConnections: []
+            },
+            callbacks: {
+                title: "components/callbacks.py",
+                type: "Handler Reaktif",
+                category: "Dash Callbacks Handler",
+                badgeClass: "bg-teal-500/10 text-teal-400 border border-teal-500/20",
+                desc: "Berisi penanganan aksi reaktif web (klik tombol latih/jalankan rute), mengambil log sistem nyata, lalu merender grafik plotly ke dashboard.",
+                libs: ["dash.dependencies", "plotly.graph_objs", "pandas"],
+                params: [
+                    "Dash Interactive Input/Output: Bind tombol ke rute logic",
+                    "State Logger: Perekam aktivitas transmisi topologi"
+                ],
+                flowConnections: ["callbacks-logic", "callbacks-exp"]
+            },
+            logic: {
+                title: "components/logic.py",
+                type: "Pusat Kalkulasi Simulasi",
+                category: "Simulation & Routing Mathematics",
+                badgeClass: "bg-sky-500/10 text-sky-400 border border-sky-500/20",
+                desc: "Menangani perhitungan matematika penemu rute terpendek, model Multi-Criteria Decision Making (MCDM) penemu cluster head terbaik, serta koordinasi energi transmisi.",
+                libs: ["numpy", "math", "wsn_rl_env (WSN_RL_Env)"],
+                params: [
+                    "Euclidean formula: Jarak fisik antar simpul sensor",
+                    "MCDM Ranking: Integrasi prioritas sisa energi & hop",
+                    "Load Model Weight: Membaca berkas .pth terbaik"
+                ],
+                flowConnections: ["logic-env", "logic-model", "logic-exp"]
+            },
+            wsn_dqn_model: {
+                title: "models/wsn_dqn_model.pth",
+                type: "Agen Kecerdasan Buatan",
+                category: "Deep Q-Network Weights",
+                badgeClass: "bg-amber-500/10 text-amber-400 border border-amber-500/20",
+                desc: "Model biner penyimpan seluruh bobot latih PyTorch. Memandu agen dalam mengambil keputusan pergerakan paket data di jaringan sensor nirkabel secara optimal.",
+                libs: ["PyTorch (Biner Tensor)"],
+                params: [
+                    "Neural Network State: Matriks bobot lapisan linear",
+                    "Action Space Size: Rentang keputusan hop sensor"
+                ],
+                flowConnections: []
+            },
+            experiments_data: {
+                title: "experiments_data/Skenario_AI_Greedy.csv & .txt",
+                type: "Repositori Hasil Evaluasi",
+                category: "Simulation Outputs & Data Logs",
+                badgeClass: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20",
+                desc: "Menyimpan data log riil performa pengujian simulasi rute WSN, tingkat delay paket, drop data, dan sisa cadangan energi.",
+                libs: ["Keluaran Berkas CSV Tabular", "Log Aliran Alur TXT"],
+                params: [
+                    "Skenario_AI_Greedy.csv: Data performa transmisi rute",
+                    "Skenario_AI_Greedy.txt: Catatan langkah rute rincian hop"
+                ],
+                flowConnections: ["exp-analysis", "exp-compare", "exp-plot"]
+            },
+            analysis_training: {
+                title: "analysis_training.py",
+                type: "Script Pengolahan Latih",
+                category: "Post-Training Evaluator",
+                badgeClass: "bg-slate-800 text-slate-300 border border-brand-border",
+                desc: "Membaca log performa model offline, memetakan kurva konvergensi reward latih, tingkat QoS, serta mengekspor plot konvergensi ke analysis_output/.",
+                libs: ["os", "re", "glob", "numpy as np", "pandas as pd", "matplotlib.pyplot as plt", "matplotlib.patches as mpatches", "matplotlib as mpl", "sys", "from pathlib import Path"],
+                params: [
+                    "Pathlib: Integrasi lokasi berkas latih offline",
+                    "mpatches: Generator area representasi jangkauan pancar",
+                    "sys.stdout.reconfigure(encoding='utf-8'): Proteksi cetak log"
+                ],
+                flowConnections: ["analysis-output"]
+            },
+            compare_results: {
+                title: "compare_results.py",
+                type: "Script Analisis Pembanding",
+                category: "Comparative Metric Plotter",
+                badgeClass: "bg-slate-800 text-slate-300 border border-brand-border",
+                desc: "Membandingkan akumulasi tingkat konsumsi baterai, packet drop rate, dan rata-rata penundaan pengiriman dari ketiga metode simulasi.",
+                libs: ["pandas as pd", "matplotlib.pyplot as plt", "os", "glob", "from config_rl import NUM_EPISODES, TIMESTEPS_PER_EPISODE"],
+                params: [
+                    "NUM_EPISODES: Import total episode evaluasi",
+                    "TIMESTEPS_PER_EPISODE: Import batas langkah timestep"
+                ],
+                flowConnections: []
+            },
+            plot_results: {
+                title: "plot_results.py",
+                type: "Script Visualisasi Batch",
+                category: "Multi-Scenario Graph Plotter",
+                badgeClass: "bg-slate-800 text-slate-300 border border-brand-border",
+                desc: "Melakukan plotting grafis kustom secara berkelompok untuk menyajikan laporan riset performa simulasi rute secara utuh.",
+                libs: ["matplotlib.pyplot as plt", "pandas as pd", "os", "glob"],
+                params: [
+                    "glob: Melacak seluruh file hasil berformat .csv",
+                    "plt.subplots: Merender kurva metrik berdampingan"
+                ],
+                flowConnections: []
+            },
+            find_central_node: {
+                title: "find_central_node.py",
+                type: "Script Utilitas Heuristik",
+                category: "Mathematical Cluster Node Finder",
+                badgeClass: "bg-slate-800 text-slate-400 border border-brand-border",
+                desc: "Mengevaluasi representasi topologi simpul sensor guna mencari node pusat dalam cluster menggunakan algoritma MCDM.",
+                libs: ["sys", "os", "random", "collections", "glob", "torch", "torch.nn as nn", "numpy as np", "from wsn_rl_env import WSN_RL_Env", "from config_rl import RANDOM_SEED, SOURCE_NODES_COUNT"],
+                params: [
+                    "torch.nn: Membantu kalkulasi matriks bobot",
+                    "RANDOM_SEED: Menjaga konsistensi deterministik sensor"
+                ],
+                flowConnections: []
+            },
+            plot_only: {
+                title: "plot_only.py",
+                type: "Script Utilitas Cepat",
+                category: "Single Metric Plotter",
+                badgeClass: "bg-slate-800 text-slate-400 border border-brand-border",
+                desc: "Melakukan penggambaran kurva tunggal secara cepat untuk pengecekan cepat metrik tanpa menjalankan dasbor.",
+                libs: ["matplotlib.pyplot as plt", "pandas as pd", "glob", "os"],
+                params: [
+                    "BASE_DIR: Path dasar folder kerja",
+                    "RESULT_DIR: Path penyimpanan plot kurva"
+                ],
+                flowConnections: []
+            }
+        };
+
+        // Fungsi interaktif select node
+        function selectNode(nodeId) {
+            resetVisualStates();
+
+            const data = moduleDatabase[nodeId];
+            if (!data) return;
+
+            // Highlight di File Tree
+            const treeEl = document.getElementById(`tree-${nodeId}`);
+            if (treeEl) {
+                treeEl.classList.add('bg-brand-accent/20', 'border-brand-accent/50', 'text-white');
+            }
+
+            // Highlight di SVG
+            const svgNode = document.getElementById(`node-${nodeId}`);
+            if (svgNode) {
+                const rect = svgNode.querySelector('rect');
+                if (rect) {
+                    rect.style.strokeWidth = '2.5px';
+                    rect.style.stroke = '#58A6FF';
+                    rect.style.filter = 'drop-shadow(0 0 6px rgba(88, 166, 255, 0.7))';
+                }
+            }
+
+            // Highlight Garis Relasi Keterhubungan data
+            if (data.flowConnections) {
+                data.flowConnections.forEach(lineId => {
+                    const line = document.getElementById(`line-${lineId}`);
+                    if (line) {
+                        line.setAttribute('stroke', '#58A6FF');
+                        line.setAttribute('stroke-width', '2.5');
+                        line.setAttribute('marker-end', 'url(#arrow-active)');
+                        line.classList.add('animate-pulse');
+                    }
+                });
+            }
+
+            // Update Panel Detail
+            const placeholder = document.getElementById('placeholder-detail');
+            const content = document.getElementById('content-detail');
+
+            placeholder.classList.add('hidden');
+            content.classList.remove('hidden');
+
+            document.getElementById('detail-type').textContent = data.type;
+            document.getElementById('detail-type').className = `text-[9px] uppercase tracking-wider px-2 py-0.5 rounded font-mono font-bold ${
+                data.type.includes('Fisik') ? 'bg-orange-500/10 text-orange-400' :
+                data.type.includes('Latih') ? 'bg-purple-500/10 text-purple-400' : 'bg-slate-800 text-slate-300'
+            }`;
+            document.getElementById('detail-title').textContent = data.title;
+            
+            const badge = document.getElementById('detail-category-badge');
+            badge.textContent = data.category;
+            badge.className = `px-2.5 py-1 rounded-full text-xs font-semibold ${data.badgeClass}`;
+
+            document.getElementById('detail-desc').textContent = data.desc;
+
+            // List Library
+            const libContainer = document.getElementById('detail-libs');
+            libContainer.innerHTML = '';
+            data.libs.forEach(lib => {
+                const span = document.createElement('span');
+                span.className = 'font-mono text-xs px-2 py-1 rounded bg-slate-900 text-slate-300 border border-slate-800';
+                span.textContent = lib;
+                libContainer.appendChild(span);
+            });
+
+            // List Parameter
+            const paramContainer = document.getElementById('detail-params');
+            paramContainer.innerHTML = '';
+            data.params.forEach(param => {
+                const parts = param.split(':');
+                const div = document.createElement('div');
+                div.className = 'py-1 border-b border-brand-border/40 flex flex-col sm:flex-row justify-between gap-1';
+                
+                if (parts.length > 1) {
+                    div.innerHTML = `<span class="font-mono text-emerald-400 font-semibold">${parts[0].trim()}</span><span class="text-slate-400 text-right text-[11px]">${parts[1].trim()}</span>`;
+                } else {
+                    div.innerHTML = `<span class="font-mono text-slate-300">${param}</span>`;
+                }
+                paramContainer.appendChild(div);
+            });
+        }
+
+        // Reset visualisasi state sorotan
+        function resetVisualStates() {
+            // Reset Tree
+            const trees = document.querySelectorAll('[id^="tree-"]');
+            trees.forEach(el => {
+                el.classList.remove('bg-brand-accent/20', 'border-brand-accent/50', 'text-white');
+            });
+
+            // Reset SVG Nodes
+            const svgNodes = document.querySelectorAll('[id^="node-"]');
+            svgNodes.forEach(node => {
+                const rect = node.querySelector('rect');
+                if (rect) {
+                    rect.style.strokeWidth = '';
+                    rect.style.stroke = '';
+                    rect.style.filter = '';
+                }
+            });
+
+            // Reset SVG Lines
+            const lines = [
+                "line-config-env", "line-config-main", "line-env-main", "line-env-base",
+                "line-main-models", "line-main-exp", "line-base-exp", "line-logic-env",
+                "line-logic-model", "line-app-layout", "line-app-callbacks", "line-callbacks-logic",
+                "line-exp-analysis", "line-exp-compare", "line-exp-plot", "line-analysis-output"
+            ];
+            lines.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.setAttribute('stroke', '#30363D');
+                    el.setAttribute('stroke-width', '1.5');
+                    el.setAttribute('marker-end', 'url(#arrow)');
+                    el.classList.remove('animate-pulse');
+                }
+            });
+        }
+
+        // Reset Tombol
+        function resetSelection() {
+            resetVisualStates();
+            document.getElementById('placeholder-detail').classList.remove('hidden');
+            document.getElementById('content-detail').classList.add('hidden');
+        }
+
+        // Fungsi Ekspor SVG ke PNG berkualitas tinggi secara dinamis
+        function exportToPNG() {
+            const svgElement = document.getElementById('interactive-svg');
+            
+            // Mengubah SVG menjadi string XML
+            const serializer = new XMLSerializer();
+            let svgString = serializer.serializeToString(svgElement);
+            
+            // Tambahkan CSS font secara inline agar ikut dirender
+            svgString = svgString.replace('</defs>', '<style>text { font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif; }</style></defs>');
+
+            const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+            const URL = window.URL || window.webkitURL || window;
+            const blobURL = URL.createObjectURL(svgBlob);
+            
+            const image = new Image();
+            image.onload = function() {
+                // Buat canvas resolusi tinggi (2x ukuran SVG asli agar tajam)
+                const canvas = document.createElement('canvas');
+                const scale = 2; 
+                canvas.width = svgElement.clientWidth * scale;
+                canvas.height = svgElement.clientHeight * scale;
+                
+                const context = canvas.getContext('2d');
+                context.scale(scale, scale);
+                
+                // Latar belakang premium yang senada dengan antarmuka gelap (#0D1117)
+                context.fillStyle = '#0D1117';
+                context.fillRect(0, 0, svgElement.clientWidth, svgElement.clientHeight);
+                
+                // Gambar SVG ke dalam Canvas
+                context.drawImage(image, 0, 0, svgElement.clientWidth, svgElement.clientHeight);
+                
+                // Konversi canvas menjadi data URL PNG dan trigger download
+                const pngURL = canvas.toDataURL('image/png');
+                const downloadLink = document.createElement('a');
+                downloadLink.href = pngURL;
+                downloadLink.download = 'Peta_Relevansi_AdaptiveQoS_Penelitian.png';
+                
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                
+                // Hapus sisa blob memori
+                URL.revokeObjectURL(blobURL);
+            };
+            image.src = blobURL;
+        }
+    </script>
+</body>
+</html>
