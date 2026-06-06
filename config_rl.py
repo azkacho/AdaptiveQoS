@@ -6,7 +6,7 @@ TIMESTEPS_PER_EPISODE = 1000
 PACKET_SIZE_BITS = 32 * 8  # 256 bits (32 Bytes)
 RANDOM_SEED = 42
 
-# --- 1. Parameter Jaringan WSN (Statik) ---
+# ---  Parameter Jaringan WSN (Statik) ---
 AREA_SIZE = 100
 MAX_COMM_DISTANCE = 35
 NUM_NODES = 50
@@ -14,7 +14,7 @@ SOURCE_NODES_COUNT = 20
 NUM_PARENT_OPTIONS = 5
 SINK_POSITION = (50, 50)
 
-# --- 2. Definisi Aksi (Data Rate nRF24L01) ---
+# ---  Definisi Aksi (Data Rate nRF24L01) ---
 DATA_RATE_THRESHOLDS = {
     "low": 250_000,
     "medium": 1_000_000,
@@ -31,7 +31,7 @@ DATA_RATE_THRESHOLDS = {
 #     "buffer_penalty": 8.0
 # } fungsi lama, tidak dipakai lagi karena sudah ada QOS_WEIGHTS yang lebih spesifik dan terintegrasi dalam reward function.
 
-# --- 4. Parameter Dinamis (Buffer & Energi) ---
+# ---  Parameter Dinamis (Buffer & Energi) ---
 MAX_BUFFER_CAPACITY = 100
 INITIAL_ENERGY_JOULE = 1000
 PACKET_ARRIVAL_RATE = 0.5
@@ -39,8 +39,6 @@ PACKET_ARRIVAL_RATE = 0.5
 # --- 5. Parameter QoS & Reward ---
 MAX_RETRANSMISSIONS = 10
 PENALTY_DROP = 100.0
-#ALPHA = 0.5 (perhitungan lama)
-#BETA = 1.0 (perhitungan lama)
 
 QOS_WEIGHTS = {
     "reliability": 0.7,
@@ -60,9 +58,6 @@ POWER_CONSUMPTION = {
     "high": 0.010
 }
 
-# ============================================================
-# --- 6. [BARU] Parameter EDF untuk Pelatihan (Opsi A) ---
-# ============================================================
 
 # Nilai EDF maksimum yang akan dilihat agen saat pelatihan.
 # Diset sama dengan EDF paling ekstrem di Skenario B (badai = 0.9),

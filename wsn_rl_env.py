@@ -18,9 +18,7 @@ from config_rl import (
 # ── Konstanta State Space ───────────────────────────────────────────────────
 NUM_LINK_METRICS    = 4   # p_loss, latency, score_rel, score_eng
 NUM_DYNAMIC_METRICS = 2   # buffer_norm, energy_norm
-# [BARU] +1 untuk EDF — agen perlu "melihat" kondisi lingkungan agar bisa
-# membuat keputusan PROAKTIF, bukan hanya reaktif via p_loss tinggi.
-NUM_EDF_METRICS     = 1
+NUM_EDF_METRICS     = 1   # edf_norm
 STATE_DIMENSION     = NUM_LINK_METRICS + NUM_DYNAMIC_METRICS + NUM_EDF_METRICS  # = 7
 
 # ── Konstanta Action Space ──────────────────────────────────────────────────
@@ -192,8 +190,6 @@ class WSN_RL_Env(gym.Env):
     def step(self, action):
         """
         Eksekusi satu langkah simulasi saat PELATIHAN.
-
-        Perubahan Opsi A:
             EDF kini diambil dari self.edf (diset oleh reset() sesuai strategi
             curriculum/random), bukan lagi hardcoded edf=0.0.
             Ini memastikan agen dilatih menghadapi berbagai kondisi lingkungan.
@@ -310,16 +306,10 @@ class WSN_RL_Env(gym.Env):
     def _get_state_for_node(self, node_id, initial=False):
         """
         Menghasilkan vektor state untuk satu node.
-
-        [PERUBAHAN OPSI A]
-        State lama (dim=6): [p_loss, latency, score_rel, score_eng, buffer, energy]
-        State baru (dim=7): [p_loss, latency, score_rel, score_eng, buffer, energy, EDF]
-
+        State (dim=7): [p_loss, latency, score_rel, score_eng, buffer, energy, EDF]
         Menambahkan EDF ke state membuat agen mampu membedakan:
           - "p_loss tinggi karena jarak jauh" (fisika buruk, pilih low rate)
           - "p_loss tinggi karena EDF = 0.9"  (cuaca buruk, pilih low rate + hop pendek)
-        Tanpa EDF di state, agen hanya bisa bereaksi terhadap konsekuensi (p_loss tinggi)
-        tetapi tidak memahami KONTEKS penyebabnya, sehingga tidak bisa proaktif.
         """
         if initial:
             link_metrics = np.array([0.0, 0.0, 1.0, 1.0])
@@ -328,8 +318,6 @@ class WSN_RL_Env(gym.Env):
 
         buffer_norm = self.node_states[node_id]['buffer'] / MAX_BUFFER_CAPACITY
         energy_norm = self.node_states[node_id]['energy'] / INITIAL_ENERGY_JOULE
-
-        # [BARU] EDF sudah dinormalisasi [0,1] — tidak perlu transformasi tambahan
         edf_norm = float(np.clip(self.edf, 0.0, 1.0))
 
         state = np.concatenate(
@@ -345,7 +333,6 @@ class WSN_RL_Env(gym.Env):
         """
         Simulasi transmisi per node untuk Digital Twin.
         EDF diambil dari self.edf yang ditimpa logic.py via: env.edf = current_edf
-        Tidak ada perubahan di fungsi ini — kompatibel dengan logic.py yang ada.
         """
         parent_id, data_rate_bps, dr_key = self._decode_action(action)
         dist = self._get_distance(int(node_id), parent_id)
