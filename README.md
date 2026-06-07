@@ -1,158 +1,74 @@
-# AdaptiveQoS
+📡 Adaptive QoS-Aware Switching Strategyin Dynamic Clustering Tree Topology for nRF24L01-Based IoT NetworksRepositori ini adalah bagian dari Penelitian Tugas Akhir S1 Elektronika dan Instrumentasi, Universitas Gadjah Mada (2026).
 
-AdaptiveQoS/
-├── analysis_output/training_convergence
-│   ├── fig_reward_convergence.png
-│   ├── fig_qos_epsilon.png
-│   ├── fig_curriculum_edf.png
-│   ├── tabel_ranking_model_mcdm.csv
-│   ├── tabel_training_summary.csv
-├── assets/
-│   └── style.css
-├── components/
-│   ├── _pycache_/
-│   ├── __init__.py
-│   ├── callbacks.py
-│   ├── layout.py
-│   └── logic.py
-├── experiments_data/
-│   ├── Skenario(A_...).csv & txt
-│   ├── Skenario(B _...). csv & txt
-│   └── Skenario(C_ ...). csv & txt
-├── logs/
-│   └── train_log_wsn_dqn_E(Episode)_T(Timesteps)_(timestamp).csv
-├── models/
-│   └── wsn_dqn_E(Episode)_T(Timesteps)(timestamp).pth
-├── results/
-│   ├── baseline_metrics_E(Episode)_T(Timesteps)_(timestamp).png
-│   ├── evaluasi_wsn_E(Episode)_T(Timesteps)_(timestamp).png
-│   ├── grafik_perbandingan_wsn_baseline_...png
-│   ├── training_metrics_...png
-│   ├── baseline_metrics_...png
-│   ├── DQN_topology_...png
-│   ├── plot_wsn_dqn_...png
-│   ├── hasil_evaluasi_wsn_dqn_...csv
-│   └── hasil_baseline_random_...csv
-├── analysis_training.py
-├── app.py
-├── baseline_random.py
-├── compare_results.py
-├── config_rl.py
-├── extract_logs.py
-├── main-rl.py
-├── plot_only.py
-├── plot_results.py
-└── wsn_rl_env.py
+📖 Abstrak / OverviewProyek ini menyediakan sistem simulasi berbasis Deep Reinforcement Learning (Deep Q-Network/DQN) untuk memecahkan masalah degradasi Quality of Service (QoS) pada Jaringan Sensor Nirkabel (WSN) yang menggunakan transceiver nRF24L01.Sistem ini memodelkan topologi Clustering Tree yang dinamis, di mana agen AI (Node/Cluster Head) secara adaptif melakukan switching strategi routing dan alokasi resource berdasarkan kondisi lingkungan jaringan yang berubah-ubah (misalnya interferensi, kepadatan traffic, atau penurunan daya baterai).
+
+✨ Fitur Utama🧠 Custom RL Environment: Lingkungan simulasi WSN kustom yang dibangun di atas API gymnasium (wsn_rl_env.py).
+🤖 Agen DQN Cerdas: Menggunakan PyTorch untuk melatih agen dalam mengambil keputusan switching yang memaksimalkan metrik QoS (Throughput, Latency, Energy Efficiency).
+📊 Dashboard Analitik Interaktif: Dibangun dengan Plotly Dash (app.py), memungkinkan pengguna untuk memantau performa jaringan, visualisasi topologi, dan metrik secara real-time.
+📈 Komparasi Baseline: Dilengkapi dengan algoritma konvensional (Random & Greedy) untuk evaluasi komparatif (baseline_random.py, compare_results.py).📂 Multi-Skenario Pengujian: Modul pemrosesan log untuk menganalisis data eksperimen dari berbagai kondisi (Skenario A, B, dan C).
+
+🗃️  AdaptiveQoS
+ ┣ 📂 analysis_output/training_convergence
+    ┗  🖼️ fig_reward_convergence.png
+    ┗  🖼️ fig_qos_epsilon.png
+    ┗  🖼️ fig_curriculum_edf.png
+    ┗  📋 tabel_ranking_model_mcdm.csv
+    ┗  📋 tabel_training_summary.csv    
+ ┣ 📂 assets/                # File CSS untuk styling dashboard Dash
+     ┗ 📜 *style.css*  
+ ┣ 📂 components/            # Modul UI/UX Dashboard (callbacks.py, layout.py, logic.py)
+     ┗  __init.py__
+     ┗ 🇵🇾 *callbacks.py* 
+     ┗ 🇵🇾 *layout.py*
+     ┗ 🇵🇾 *logic.py* 
+ ┣ 📂 experiment_data/       # Kumpulan raw data log (Skenario A, B, C)
+    ┗   fig_reward_convergence.png
+ ┣ 📂 logs/                  # File log hasil training model
+    ┗  🌱 train_log_wsn_dqn_E200_T1000.csv
+    ┗  🌱 train_log_wsn_dqn_E500_T1000.csv
+    ┗  🌱 train_log_wsn_dqn_E700_T1000.csv
+    ┗  🌱 train_log_wsn_dqn_E1000_T200.csv
+    ┗  🌱 train_log_wsn_dqn_E1000_T500.csv
+    ┗  🌱 train_log_wsn_dqn_E1000_T1000.csv
+    ┗  🌱 train_log_wsn_dqn_E2000_T1500.csv
+ ┣ 📂 models/                # Checkpoint model PyTorch (.pth) yang telah dilatih
+    ┗  ✳️ wsn_dqn_E200_T1000.pth
+    ┗  ✳️ wsn_dqn_E500_T1000.pth
+    ┗  ✳️ wsn_dqn_E700_T1000.pth
+    ┗  ✳️ wsn_dqn_E1000_T200.pth
+    ┗  ✳️ wsn_dqn_E1000_T500.pth
+    ┗  ✳️ wsn_dqn_E1000_T1000.pth
+    ┗  ✳️ wsn_dqn_E2000_T1500.pth
+ ┣ 📂 results/               # Output grafik (.png) dan file hasil perbandingan (.csv)
+ ┣ 🇵🇾 *analysis_training.py*  
+ ┣ 🇵🇾 *app.py*                 # 🚀 Skrip utama untuk menjalankan Dashboard Interaktif
+ ┣ 🇵🇾 *baseline_random.py*     # Algoritma pembanding (Baseline)
+ ┣ 🇵🇾 *compare_results.py*     # Skrip generator grafik komparasi AI vs Baseline
+ ┣ 🇵🇾 *config_rl.py*           # Parameter dan Hyperparameter global jaringan & RL
+ ┣ 🇵🇾 *extract_logs.py*
+ ┣ 🇵🇾 *find_central_node.py*     
+ ┣ 🇵🇾 *main-rl.py*             # 🚀 Skrip utama untuk Training & Evaluasi Model DQN
+ ┣ 🇵🇾 *plot_only.py*  
+ ┣ 🇵🇾 *plot_results.py*  
+ ┣ 🇵🇾 *wsn_rl_env.py*          # Modul Environment Gymnasium WSN
+ ┗ 📜 *README.md*              # Dokumentasi proyek
+
+📟
+✳️
+🌱
+🖼️
+📑
 
 
+⚙️ Instalasi dan PersiapanPastikan Anda memiliki Python 3.8 atau lebih baru. Disarankan menggunakan Virtual Environment.Clone Repositorigit clone [https://github.com/azkacho/adaptiveqos.git](https://github.com/azkacho/adaptiveqos.git)
+cd adaptiveqos
 
-# Daftar Library Yang digunakan dan Dependendsinya
+Install DependensiJalankan perintah berikut untuk menginstal library yang dibutuhkan:pip install torch pandas gymnasium dash plotly numpy matplotlib
+🚀 Cara Menjalankan Program1. Melatih Model AI (Training DQN)Untuk memulai proses pelatihan agen RL dalam lingkungan WSN, jalankan:python main-rl.py
 
-# _____________________________________________________________________________________
-[analysis_traianing.py]
-import os
-import re
-import glob
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-import matplotlib as mpl
-import sys
-sys.stdout.reconfigure(encoding='utf-8')
-from pathlib import Path
+Catatan: Hyperparameter seperti jumlah EPISODES, ukuran grid, dan rentang traffic dapat diubah melalui file config_rl.py.2. Membuka Dashboard Analitik InteraktifUntuk memvisualisasikan hasil, topologi jaringan, dan performa QoS, jalankan web dashboard:python app.py
 
-# _____________________________________________________________________________________
-[app.py]
-import dash
-*from components.layout import create_layout*
-*from components.callbacks import *register_callbacks*
+Buka browser Anda dan akses http://127.0.0.1:8050/. Dashboard ini akan merender tata letak dari folder components/ dan memuat log data dari folder experiment_data/.3. Komparasi Performa (Evaluasi)Untuk membandingkan hasil strategi AI dengan strategi Baseline (Random/Greedy) dan mencetak grafik .png ke folder results/, jalankan:python baseline_random.py
+python compare_results.py
 
-# _____________________________________________________________________________________
-[baseline_random.py]
-import numpy as np
-import matplotlib.pyplot as plt
-import os
-import pandas as pd
-from tensorboard.backend.event_processing.event_accumulator import EventAccumulator
-*from wsn_rl_env import WSN_RL_Env*
-from datetime import datetime
-
-# _____________________________________________________________________________________
-[compare_results.py]
-import pandas as pd
-import matplotlib.pyplot as plt
-import os
-import glob
-*from config_rl import NUM_EPISODES, TIMESTEPS_PER_EPISODE*
-
-# _____________________________________________________________________________________
-[find_central_node.py]
-import sys, os, random, collections, glob
-sys.path.insert(0, '.')
-
-import torch
-import torch.nn as nn
-import numpy as np
-import sys
-sys.stdout.reconfigure(encoding='utf-8')
-*from wsn_rl_env import WSN_RL_Env*
-*from config_rl import RANDOM_SEED, SOURCE_NODES_COUNT*
-
-# _____________________________________________________________________________________
-[main-rl.py]
-import gymnasium as gym
-import numpy as np
-import torch
-import torch.nn as nn
-import torch.optim as optim
-import random
-from collections import deque
-import matplotlib.pyplot as plt
-from datetime import datetime
-import os
-import csv
-
-# _____________________________________________________________________________________
-[plot_only.py]
-import matplotlib.pyplot as plt
-import pandas as pd
-import glob
-import os
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-RESULT_DIR = os.path.join(BASE_DIR, "results")
-LOGS_DIR = os.path.join(BASE_DIR, "logs")
-
-# _____________________________________________________________________________________
-[plot_result.py]
-import matplotlib.pyplot as plt
-import pandas as pd
-import os
-import glob
-
-base_dir = os.path.dirname(os.path.abspath(__file__))
-results_dir = os.path.join(base_dir, "results")
-search_pattern = os.path.join(results_dir, "hasil_evaluasi_wsn_dqn_E1000_T1000_*.csv")
-list_of_files = glob.glob(search_pattern)
-
-# _____________________________________________________________________________________
-[wsn_rl_env.py]
-import gymnasium as gym
-from gymnasium import spaces
-import numpy as np
-import networkx as nx
-import random
-import math
-
-*from config_rl import (*
-    NUM_NODES, AREA_SIZE, MAX_COMM_DISTANCE, SINK_POSITION,
-    DATA_RATE_THRESHOLDS, MAX_BUFFER_CAPACITY,
-    POWER_CONSUMPTION, NUM_PARENT_OPTIONS,
-    PACKET_SIZE_BITS, PACKET_ARRIVAL_RATE, TIMESTEPS_PER_EPISODE,
-    MAX_RETRANSMISSIONS, PENALTY_DROP, ALPHA, BETA,
-    QOS_WEIGHTS, MAX_EXPECTED_LATENCY, INITIAL_ENERGY_JOULE, RANDOM_SEED,
-    EDF_TRAIN_MAX, EDF_TRAIN_STRATEGY, EDF_CURRICULUM_PHASES
-*)*
-
-# _____________________________________________________________________________________
+🧪 Skenario SimulasiProyek ini memvalidasi keandalan algoritma melalui beberapa skenario data (dapat ditemukan di folder experiment_data/):Skenario A: Pengujian variasi traffic load dan dampaknya terhadap packet delivery ratio (PDR) dan latensi.Skenario B: Evaluasi keandalan terhadap interferensi link radio nRF24L01 secara fluktuatif.Skenario C: Skenario penipisan energi (Energy Depletion) untuk mengukur umur jaringan (Network Lifetime).👨‍💻 PenulisAzka Choirul Munna Program Studi S1 Elektronika dan InstrumentasiUniversitas Gadjah Mada📧 Kontak: [Email Anda] | 🌐 LinkedIn: [Tautan Profil Anda]Dibuat untuk keperluan Penelitian Skripsi. Penggunaan atau replikasi metode diharapkan mencantumkan sitasi pada karya tulis/repositori ini.
