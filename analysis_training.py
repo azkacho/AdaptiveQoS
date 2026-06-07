@@ -374,7 +374,7 @@ def evaluate_best_model(models_dict, output_dir):
             'qos'     : hard['Avg_QoS'].mean(),
             'drops'   : hard['Drops'].mean(),
             'retries' : hard['Retries'].mean() if 'Retries' in hard.columns else 0.0,
-            'steps'   : hard['Steps'].mean()   if 'Steps'   in hard.columns else 0.0,
+            'steps'   : hard['Steps_Taken'].mean()   if 'Steps_Taken'   in hard.columns else 0.0,
             'reward'  : hard['Reward'].mean(),
         }
 
@@ -391,7 +391,7 @@ def evaluate_best_model(models_dict, output_dir):
             return 1.0
         return float(np.clip((val - mn) / (mx - mn), 0.0, 1.0))
 
-    # ── Pass 2: hitung skor MCDM per model ───────────────────────────────────
+    # ──  Perhitungan skor MCDM per model ───────────────────────────────────
     results = []
     for model_name, v in raw.items():
         # QoS : higher is better → normalisasi langsung
