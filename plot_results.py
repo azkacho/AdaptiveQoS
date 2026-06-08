@@ -6,7 +6,7 @@ import glob
 base_dir = os.path.dirname(os.path.abspath(__file__))
 results_dir = os.path.join(base_dir, "results")
 
-search_pattern = os.path.join(results_dir, "hasil_evaluasi_wsn_dqn_E1000_T1000_*.csv")
+search_pattern = os.path.join(results_dir, "hasil_evaluasi_wsn_dqn_E2000_T1500_*.csv")
 #--- UBAH NAMA CSV SESUAI NAMA MODEL---#
 list_of_files = glob.glob(search_pattern)
 

@@ -14,7 +14,7 @@ if not os.path.exists(RESULT_DIR):
 
 def extract_csv_to_eval():
     # --- 2. DETEKSI LOG TERBARU OTOMATIS ---
-    log_pattern = os.path.join(LOG_DIR, "train_log_wsn_dqn_E1000_T1000*.csv")
+    log_pattern = os.path.join(LOG_DIR, "train_log_wsn_dqn_E2000_T1500*.csv")
     #--- UBAH NAMA CSV SESUAI NAMA MODEL---#
     list_of_files = glob.glob(log_pattern)
     

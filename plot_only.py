@@ -18,7 +18,7 @@ if not os.path.exists(RESULT_DIR):
 
 # ── 2. DETEKSI FILE CSV TERBARU ─────────────────────────────────────────
 # Menggunakan wildcard (*) agar bisa membaca model apa pun yang terbaru
-log_pattern = os.path.join(LOGS_DIR, "train_log_wsn_dqn_E1000_T1000*.csv")
+log_pattern = os.path.join(LOGS_DIR, "train_log_wsn_dqn_E2000_T1500*.csv")
 list_of_files = glob.glob(log_pattern)
 
 if not list_of_files:
