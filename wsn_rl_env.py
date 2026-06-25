@@ -19,7 +19,7 @@ from config_rl import (
 NUM_LINK_METRICS    = 4   # p_loss, latency, score_rel, score_eng
 NUM_DYNAMIC_METRICS = 2   # buffer_norm, energy_norm
 NUM_EDF_METRICS     = 1   # edf_norm
-STATE_DIMENSION     = NUM_LINK_METRICS + NUM_DYNAMIC_METRICS + NUM_EDF_METRICS  # = 7
+STATE_DIMENSION     = NUM_LINK_METRICS + NUM_DYNAMIC_METRICS + NUM_EDF_METRICS  # = 7 State Space Dimension
 
 # ── Konstanta Action Space ──────────────────────────────────────────────────
 DATA_RATE_OPTIONS = len(DATA_RATE_THRESHOLDS)
