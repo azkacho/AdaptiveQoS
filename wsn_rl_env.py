@@ -78,6 +78,7 @@ class WSN_RL_Env(gym.Env):
         self.network_graph.add_node('sink')
         self._precalculate_links_and_parents()
 
+# ── Precalculate Links and Parents ───────────────────────────────────────
     def _precalculate_links_and_parents(self):
         for i in range(self.num_nodes):
             neighbors = [
@@ -89,6 +90,7 @@ class WSN_RL_Env(gym.Env):
                 neighbors = [min(distances, key=distances.get)]
             self.parent_mapping[i] = random.sample(neighbors, min(NUM_PARENT_OPTIONS, len(neighbors)))
 
+# ── Perhitungan Jarak (Persamaan 3.1)─────────────────────────────────────────────────────
     def _get_distance(self, u, v):
         if u not in self.positions or v not in self.positions:
             return MAX_COMM_DISTANCE + 100

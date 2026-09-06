@@ -1,74 +1,102 @@
-📡 Adaptive QoS-Aware Switching Strategyin Dynamic Clustering Tree Topology for nRF24L01-Based IoT NetworksRepositori ini adalah bagian dari Penelitian Tugas Akhir S1 Elektronika dan Instrumentasi, Universitas Gadjah Mada (2026).
+# Adaptive QoS-Aware Switching Strategy for nRF24L01-Based IoT Networks
 
-📖 Abstrak / OverviewProyek ini menyediakan sistem simulasi berbasis Deep Reinforcement Learning (Deep Q-Network/DQN) untuk memecahkan masalah degradasi Quality of Service (QoS) pada Jaringan Sensor Nirkabel (WSN) yang menggunakan transceiver nRF24L01.Sistem ini memodelkan topologi Clustering Tree yang dinamis, di mana agen AI (Node/Cluster Head) secara adaptif melakukan switching strategi routing dan alokasi resource berdasarkan kondisi lingkungan jaringan yang berubah-ubah (misalnya interferensi, kepadatan traffic, atau penurunan daya baterai).
+A simulation framework for adaptive Quality of Service (QoS) switching in dynamic clustering-tree topologies, built for nRF24L01-based wireless sensor networks.
 
-✨ Fitur Utama🧠 Custom RL Environment: Lingkungan simulasi WSN kustom yang dibangun di atas API gymnasium (wsn_rl_env.py).
-🤖 Agen DQN Cerdas: Menggunakan PyTorch untuk melatih agen dalam mengambil keputusan switching yang memaksimalkan metrik QoS (Throughput, Latency, Energy Efficiency).
-📊 Dashboard Analitik Interaktif: Dibangun dengan Plotly Dash (app.py), memungkinkan pengguna untuk memantau performa jaringan, visualisasi topologi, dan metrik secara real-time.
-📈 Komparasi Baseline: Dilengkapi dengan algoritma konvensional (Random & Greedy) untuk evaluasi komparatif (baseline_random.py, compare_results.py).📂 Multi-Skenario Pengujian: Modul pemrosesan log untuk menganalisis data eksperimen dari berbagai kondisi (Skenario A, B, dan C).
+This repository is part of an undergraduate thesis (Tugas Akhir) in Electronics and Instrumentation at Universitas Gadjah Mada, 2026.
 
-🗃️  AdaptiveQoS
- ┣ 📂 analysis_output/training_convergence
-    ┗  🖼️ fig_reward_convergence.png
-    ┗  🖼️ fig_qos_epsilon.png
-    ┗  🖼️ fig_curriculum_edf.png
-    ┗  📋 tabel_ranking_model_mcdm.csv
-    ┗  📋 tabel_training_summary.csv    
- ┣ 📂 assets/                # File CSS untuk styling dashboard Dash
-     ┗ 📜 *style.css*  
- ┣ 📂 components/            # Modul UI/UX Dashboard (callbacks.py, layout.py, logic.py)
-     ┗  __init.py__
-     ┗ 🇵🇾 *callbacks.py* 
-     ┗ 🇵🇾 *layout.py*
-     ┗ 🇵🇾 *logic.py* 
- ┣ 📂 experiment_data/       # Kumpulan raw data log (Skenario A, B, C)
-    ┗   fig_reward_convergence.png
- ┣ 📂 logs/                  # File log hasil training model
-    ┗  🌱 train_log_wsn_dqn_E200_T1000.csv
-    ┗  🌱 train_log_wsn_dqn_E500_T1000.csv
-    ┗  🌱 train_log_wsn_dqn_E700_T1000.csv
-    ┗  🌱 train_log_wsn_dqn_E1000_T200.csv
-    ┗  🌱 train_log_wsn_dqn_E1000_T500.csv
-    ┗  🌱 train_log_wsn_dqn_E1000_T1000.csv
-    ┗  🌱 train_log_wsn_dqn_E2000_T1500.csv
- ┣ 📂 models/                # Checkpoint model PyTorch (.pth) yang telah dilatih
-    ┗  ✳️ wsn_dqn_E200_T1000.pth
-    ┗  ✳️ wsn_dqn_E500_T1000.pth
-    ┗  ✳️ wsn_dqn_E700_T1000.pth
-    ┗  ✳️ wsn_dqn_E1000_T200.pth
-    ┗  ✳️ wsn_dqn_E1000_T500.pth
-    ┗  ✳️ wsn_dqn_E1000_T1000.pth
-    ┗  ✳️ wsn_dqn_E2000_T1500.pth
- ┣ 📂 results/               # Output grafik (.png) dan file hasil perbandingan (.csv)
- ┣ 🇵🇾 *analysis_training.py*  
- ┣ 🇵🇾 *app.py*                 # 🚀 Skrip utama untuk menjalankan Dashboard Interaktif
- ┣ 🇵🇾 *baseline_random.py*     # Algoritma pembanding (Baseline)
- ┣ 🇵🇾 *compare_results.py*     # Skrip generator grafik komparasi AI vs Baseline
- ┣ 🇵🇾 *config_rl.py*           # Parameter dan Hyperparameter global jaringan & RL
- ┣ 🇵🇾 *extract_logs.py*
- ┣ 🇵🇾 *find_central_node.py*     
- ┣ 🇵🇾 *main-rl.py*             # 🚀 Skrip utama untuk Training & Evaluasi Model DQN
- ┣ 🇵🇾 *plot_only.py*  
- ┣ 🇵🇾 *plot_results.py*  
- ┣ 🇵🇾 *wsn_rl_env.py*          # Modul Environment Gymnasium WSN
- ┗ 📜 *README.md*              # Dokumentasi proyek
+## Overview
 
-📟
-✳️
-🌱
-🖼️
-📑
+This project uses Deep Reinforcement Learning (Deep Q-Network) to address QoS degradation in wireless sensor networks built on nRF24L01 transceivers. The system models a dynamic clustering-tree topology in which an AI agent, acting as a node or cluster head, adaptively switches routing strategy and resource allocation in response to changing network conditions such as interference, traffic density, and battery depletion.
 
+## Features
 
-⚙️ Instalasi dan PersiapanPastikan Anda memiliki Python 3.8 atau lebih baru. Disarankan menggunakan Virtual Environment.Clone Repositorigit clone [https://github.com/azkacho/adaptiveqos.git](https://github.com/azkacho/adaptiveqos.git)
+- Custom RL environment built on the Gymnasium API (`wsn_rl_env.py`)
+- DQN agent implemented in PyTorch, trained to optimize throughput, latency, and energy efficiency
+- Interactive analytics dashboard built with Plotly Dash (`app.py`) for real-time topology visualization and performance monitoring
+- Baseline comparison against conventional Random and Greedy algorithms
+- Multi-scenario testing across three experimental conditions (A, B, C)
+
+## Project Structure
+
+```
+AdaptiveQoS/
+├── analysis_output/
+│   └── training_convergence/
+│       ├── fig_reward_convergence.png
+│       ├── fig_qos_epsilon.png
+│       ├── fig_curriculum_edf.png
+│       ├── tabel_ranking_model_mcdm.csv
+│       └── tabel_training_summary.csv
+├── assets/                    # Dashboard CSS
+├── components/                # Dashboard UI modules
+│   ├── callbacks.py
+│   ├── layout.py
+│   └── logic.py
+├── experiment_data/           # Raw experiment logs (Scenarios A, B, C)
+├── logs/                      # Training logs
+├── models/                    # Trained PyTorch checkpoints (.pth)
+├── results/                   # Output plots and comparison files
+├── analysis_training.py
+├── app.py                     # Runs the interactive dashboard
+├── baseline_random.py         # Baseline algorithm
+├── compare_results.py         # Generates AI vs baseline comparison plots
+├── config_rl.py                # Global network and RL hyperparameters
+├── extract_logs.py
+├── find_central_node.py
+├── main-rl.py                  # Trains and evaluates the DQN model
+├── plot_only.py
+├── plot_results.py
+├── wsn_rl_env.py                # Gymnasium WSN environment module
+└── README.md
+```
+
+## Installation
+
+Requires Python 3.8 or later. A virtual environment is recommended.
+
+```bash
+git clone https://github.com/azkacho/adaptiveqos.git
 cd adaptiveqos
+pip install torch pandas gymnasium dash plotly numpy matplotlib
+```
 
-Install DependensiJalankan perintah berikut untuk menginstal library yang dibutuhkan:pip install torch pandas gymnasium dash plotly numpy matplotlib
-🚀 Cara Menjalankan Program1. Melatih Model AI (Training DQN)Untuk memulai proses pelatihan agen RL dalam lingkungan WSN, jalankan:python main-rl.py
+## Usage
 
-Catatan: Hyperparameter seperti jumlah EPISODES, ukuran grid, dan rentang traffic dapat diubah melalui file config_rl.py.2. Membuka Dashboard Analitik InteraktifUntuk memvisualisasikan hasil, topologi jaringan, dan performa QoS, jalankan web dashboard:python app.py
+### Train the model
 
-Buka browser Anda dan akses http://127.0.0.1:8050/. Dashboard ini akan merender tata letak dari folder components/ dan memuat log data dari folder experiment_data/.3. Komparasi Performa (Evaluasi)Untuk membandingkan hasil strategi AI dengan strategi Baseline (Random/Greedy) dan mencetak grafik .png ke folder results/, jalankan:python baseline_random.py
+```bash
+python main-rl.py
+```
+
+Hyperparameters such as episode count, grid size, and traffic range can be adjusted in `config_rl.py`.
+
+### Run the dashboard
+
+```bash
+python app.py
+```
+
+Open `http://127.0.0.1:8050/` in your browser. The dashboard renders layouts from `components/` and loads experiment data from `experiment_data/`.
+
+### Compare against baselines
+
+```bash
+python baseline_random.py
 python compare_results.py
+```
 
-🧪 Skenario SimulasiProyek ini memvalidasi keandalan algoritma melalui beberapa skenario data (dapat ditemukan di folder experiment_data/):Skenario A: Pengujian variasi traffic load dan dampaknya terhadap packet delivery ratio (PDR) dan latensi.Skenario B: Evaluasi keandalan terhadap interferensi link radio nRF24L01 secara fluktuatif.Skenario C: Skenario penipisan energi (Energy Depletion) untuk mengukur umur jaringan (Network Lifetime).👨‍💻 PenulisAzka Choirul Munna Program Studi S1 Elektronika dan InstrumentasiUniversitas Gadjah Mada📧 Kontak: [Email Anda] | 🌐 LinkedIn: [Tautan Profil Anda]Dibuat untuk keperluan Penelitian Skripsi. Penggunaan atau replikasi metode diharapkan mencantumkan sitasi pada karya tulis/repositori ini.
+Comparison plots are written to `results/`.
+
+## Simulation Scenarios
+
+- **Scenario A** — traffic load variation and its effect on packet delivery ratio and latency
+- **Scenario B** — reliability under fluctuating nRF24L01 radio link interference
+- **Scenario C** — energy depletion, measuring network lifetime
+
+## Author
+
+Azka Choirul Munna
+S1 Electronics and Instrumentation, Universitas Gadjah Mada
+Email: [your email] · LinkedIn: [your profile link]
+
+Built for undergraduate thesis research. If you use or adapt this method, please cite this repository or the accompanying thesis.
