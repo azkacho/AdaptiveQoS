@@ -97,6 +97,6 @@ Comparison plots are written to `results/`.
 
 Azka Choirul Munna
 S1 Electronics and Instrumentation, Universitas Gadjah Mada
-Email: [your email] · LinkedIn: [your profile link]
+Email: azkachoirul03@gmail.com · LinkedIn: https://www.linkedin.com/in/azkachoirul/
 
 Built for undergraduate thesis research. If you use or adapt this method, please cite this repository or the accompanying thesis.
